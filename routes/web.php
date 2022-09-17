@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OfficialsController;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,28 +31,9 @@ Route::resource('officials', OfficialsController::class);
 Route::get('/smsRedirect', [App\Http\Controllers\UserController::class, 'smsRedirect'])->name('SMS Redirect');
 Route::get('/globelabSuccess/{access_token}/{subscriber_number}', [App\Http\Controllers\UserController::class, 'globelabSuccess'])->name('globelabSuccess');
 Route::get('/globelabSave', [App\Http\Controllers\UserController::class, 'globelabSave'])->name('globelabSave');
-Route::any('/testing', function (Request $request) {
-    $request['proof_id_filename_title'] = explode(".",$request->proof_id_filename->getClientOriginalName())[0];
+Route::get('/residentRegister',  [App\Http\Controllers\UserController::class, 'residentRegister'])->name('residentRegister');
+Route::post('/residentRegisterCreate',  [App\Http\Controllers\UserController::class, 'residentRegisterCreate'])->name('residentRegisterCreate');
 
-    if(sizeof(explode(".",$request->proof_id_filename->getClientOriginalName()) ) > 2 ){
-        return back()
-            ->with('error','Filenames should not have "." character.')
-            ->withInput();
-    }
-
-    // $validated = $request->validate([
-    //     'proof_id_filename_title' => 'required|alpha_dash'
-    // ]);
-
-
-    $request->proof_id_filename->storeAs('public', $request->proof_id_filename->getClientOriginalName());
-    $row = new User;
-    $row->first_name = $request->input('first_name');
-    $row->email = $request->input('email');
-    $row->last_name = $request->input('last_name');
-    $row->password =  Hash::make($request->input('last_name'));
-
-    $row->save();
-    return back()->with('success', 'File Created Successfully!');
-});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+

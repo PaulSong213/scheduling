@@ -19,10 +19,8 @@
                         <tbody>
                             @foreach ($officials as $official)
                                 <td>{{ $official->position }}</td>
-                                <td>{{ $official->name }}</td>
                                 <td>{{ $official->email }}</td>
                                 <td>{{ $official->address }}</td>
-                                <td>{{ $official->age }}</td>
                             @endforeach
                         </tbody>
                     </table>

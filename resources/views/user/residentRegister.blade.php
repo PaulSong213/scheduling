@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-@if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
-@endif
     <style>
         .gradient-custom-2 {
-            background: url('/images/bg.jpg');
+            background: url('/images/bg.jpg') no-repeat;
+            background-size: auto 120%;
+
         }
 
         @media (min-width: 768px) {
@@ -28,16 +27,17 @@
                 <div class="col-xl-10">
                     <div class="card rounded-3 text-black">
                         <div class="row g-0">
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 <div class="card-body p-md-5 mx-md-4">
 
                                     <div class="text-center">
-                                        <img src="/images/logo.jpg"
-                                            style="width: 105px;" alt="logo">
-                                        <h4 class="mt-1 mb-5 pb-1">Create Account for Barangay Manuyo Dos Online Public Files Request System</h4>
+                                        <img src="/images/logo.jpg" style="width: 105px;" alt="logo">
+                                        <h4 class="mt-1 mb-5 pb-1">Create Account for Barangay Manuyo Dos Online Public
+                                            Files Request System</h4>
                                     </div>
 
-                                    <form role="form" action="{{ '/testing' }}" method="POST" enctype="multipart/form-data">
+                                    <form role="form" action="{{ route('residentRegisterCreate') }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
 
                                         <div class="row mb-3">
@@ -112,16 +112,16 @@
                                         </div>
 
                                         <div class="row mb-3">
-                                            <label for="profile_filename"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Profile Image') }}</label>
+                                            <label for="birthdate"
+                                                class="col-md-4 col-form-label text-md-end">{{ __('Birth date') }}</label>
 
                                             <div class="col-md-8">
-                                                <input id="profile_filename" type="file"
-                                                    class="form-control @error('profile_filename') is-invalid @enderror"
-                                                    name="profile_filename" value="{{ old('profile_filename') }}" required
-                                                    autocomplete="profile_filename">
+                                                <input id="birthdate" type="date"
+                                                    class="form-control @error('birthdate') is-invalid @enderror"
+                                                    name="birthdate" value="{{ old('birthdate') }}" required
+                                                    autocomplete="birthdate">
 
-                                                @error('profile_filename')
+                                                @error('birthdate')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -130,14 +130,56 @@
                                         </div>
 
                                         <div class="row mb-3">
+                                            <div class="row mb-2">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-8">
+                                                    <div class="rounded overflow-hidden shadow-sm border bg-danger"
+                                                        style="width:max-content">
+                                                        <img id="profile-preview" width="200px"
+                                                            src="/images/profile-default-preview.png" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label for="profile_filename"
+                                                    class="col-md-4 col-form-label text-md-end">{{ __('Profile Image') }}</label>
+
+                                                <div class="col-md-8">
+                                                    <input id="profile_filename" type="file" onchange="document.getElementById('profile-preview').src = window.URL.createObjectURL(this.files[0])"
+                                                        class="form-control @error('profile_filename_title') is-invalid @enderror"
+                                                        name="profile_filename" value="{{ old('profile_filename') }}"
+                                                        required autocomplete="profile_filename">
+
+                                                    @error('profile_filename_title')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+
+                                            <div class="row mb-2">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-8">
+                                                    <div class="rounded overflow-hidden bg-danger"
+                                                        style="width:max-content">
+                                                        <img id="proof_id_filename_preview" width="200px"
+                                                            src="/images/proof-id-default-preview.jpg" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <label for="proof_id_filename"
                                                 class="col-md-4 col-form-label text-md-end">{{ __('ID Image') }}</label>
 
                                             <div class="col-md-8">
-                                                <input id="proof_id_filename" type="file"
-                                                    class="form-control @error('proof_id_filename') is-invalid @enderror"
-                                                    name="proof_id_filename" value="{{ old('proof_id_filename') }}" required
-                                                    autocomplete="proof_id_filename">
+                                                <input id="proof_id_filename" type="file" onchange="document.getElementById('proof_id_filename_preview').src = window.URL.createObjectURL(this.files[0])"
+                                                    class="form-control @error('proof_id_filename_title') is-invalid @enderror"
+                                                    name="proof_id_filename" value="{{ old('proof_id_filename') }}"
+                                                    required autocomplete="proof_id_filename_title">
                                                 <small>Image of your ID that contains the Address of Barangay Manuyo</small>
 
                                                 @error('proof_id_filename')
@@ -186,7 +228,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                            <div class="col-lg-4 d-flex align-items-center gradient-custom-2">
                                 <div class="text-white px-3 py-4 p-md-5 mx-md-4 invisible">
                                     <h4 class="mb-4">We are more than just a company</h4>
                                     <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -202,4 +244,10 @@
             </div>
         </div>
     </section>
+    <script>
+        $(document).ready(function() {
+            document.getElementById('birthdate').value = "2000-01-01";;
+            
+        });
+    </script>
 @endsection
