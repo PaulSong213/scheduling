@@ -18,7 +18,7 @@ class OfficialsController extends Controller
     {
         $officials = DB::table('officials')
             ->join('users', 'officials.user_id', '=', 'users.id')
-            ->select('officials.position', 'users.*')
+            ->select('officials.*', 'users.*')
             ->get();
         return view('officials/index')->with('officials', $officials);
     } 
@@ -30,7 +30,11 @@ class OfficialsController extends Controller
      */
     public function create()
     {
-        //
+        $officials = DB::table('officials')
+        ->join('users', 'officials.user_id', '=', 'users.id')
+        ->select('officials.position', 'users.*')
+        ->get();
+    return view('officials/index')->with('officials', $officials);
     }
 
     /**
