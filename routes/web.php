@@ -21,3 +21,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/officials', [App\Http\Controllers\OfficialsController::class, 'index'])->name('officials');
+Route::get('/permits', [App\Http\Controllers\PermitsController::class, 'index'])->name('permits');
+Route::get('/events', [App\Http\Controllers\EventsController::class, 'index'])->name('events');
