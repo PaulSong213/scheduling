@@ -8,9 +8,12 @@ use App\Models\User;
 use Auth;
 use App\Rules\Filename;
 use Illuminate\Support\Facades\Hash;
-
+use Twilio\Rest\Client;
 class UserController extends Controller
 {
+    public $sid    = "AC0ee01350a558384959c64af938e2d4ca"; 
+    public $token  = "4e272864a7cb41c73cd9c47873b9b92a"; 
+
     public function index()
     {
         return view('home');
@@ -52,9 +55,8 @@ class UserController extends Controller
                 'globe_subscriber_number' => $subscriber_number,
             ]);
         return view('user.globelabSuccess')
-            ->with('access_token',$access_token)
-            ->with('subscriber_number',$subscriber_number)
-            ;
+            ->with('access_token', $access_token)
+            ->with('subscriber_number', $subscriber_number);
     }
 
     public function randText($len = 20)
@@ -103,6 +105,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'email' => 'required|unique:users',
             'password' => 'required|confirmed|min:6',
+            'cellphone_number' => 'required',
             'proof_id_filename_title' => [
                 'required',
                 'alpha_dash', // This is your custom rule
@@ -116,10 +119,13 @@ class UserController extends Controller
         $request->proof_id_filename->storeAs('public', $proof_id_full);
         $request->profile_filename->storeAs('public', $profile_full);
 
+        $complete_phone_number = "+63".$request->input('cellphone_number');
+
         $new_user = User::create([
+            'cellphone_number' => $complete_phone_number,
             'first_name' => $request->input('first_name'),
-            'email' => $request->input('email'),
             'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
             'birthdate' => $request->input('birthdate'),
             'address' => $request->input('address'),
             'password' => Hash::make($request->input('password')),
@@ -141,12 +147,11 @@ class UserController extends Controller
         return view('user.residentRegister');
     }
 
-    public function verifyPhoneNumber(){
-        if(!Auth::user()->globe_access_token || !Auth::user()->globe_subscriber_number ){
+    public function verifyPhoneNumber()
+    {
+        if (!Auth::user()->globe_access_token || !Auth::user()->globe_subscriber_number) {
             return redirect('/smsRedirect');
             die();
         }
     }
-
-    
 }

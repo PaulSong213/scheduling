@@ -26,6 +26,9 @@ class User extends Authenticatable
         'password',
         'proof_id_filename',
         'profile_filename',
+        'cellphone_number',
+        'is_verified_as_resident',
+        'type'
     ];
 
     /**

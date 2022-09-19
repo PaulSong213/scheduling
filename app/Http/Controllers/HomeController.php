@@ -23,10 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        if(!Auth::user()->globe_access_token || !Auth::user()->globe_subscriber_number ){
-            return redirect('/smsRedirect');
-            die();
-        }
         return view('home');
     }
 }

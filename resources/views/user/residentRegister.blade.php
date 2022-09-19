@@ -21,6 +21,9 @@
             }
         }
     </style>
+    @if($errors->any())
+    {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif
     <section class="h-100 gradient-form mx-auto py-3">
         <div class="container h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -130,6 +133,28 @@
                                         </div>
 
                                         <div class="row mb-3">
+                                            <label for="phone_number"
+                                                class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
+
+                                            <div class="col-md-8">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">+63</span>
+                                                    </div>
+                                                    <input id="cellphone_number" type="text"
+                                                        class="form-control @error('cellphone_number') is-invalid @enderror"
+                                                        name="cellphone_number" value="{{ old('cellphone_number') }}" required
+                                                        autocomplete="cellphone_number">
+                                                </div>
+                                                @error('cellphone_number')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
                                             <div class="row mb-2">
                                                 <div class="col-md-4"></div>
                                                 <div class="col-md-8">
@@ -145,7 +170,8 @@
                                                     class="col-md-4 col-form-label text-md-end">{{ __('Profile Image') }}</label>
 
                                                 <div class="col-md-8">
-                                                    <input id="profile_filename" type="file" onchange="document.getElementById('profile-preview').src = window.URL.createObjectURL(this.files[0])"
+                                                    <input id="profile_filename" type="file"
+                                                        onchange="document.getElementById('profile-preview').src = window.URL.createObjectURL(this.files[0])"
                                                         class="form-control @error('profile_filename_title') is-invalid @enderror"
                                                         name="profile_filename" value="{{ old('profile_filename') }}"
                                                         required autocomplete="profile_filename">
@@ -176,7 +202,8 @@
                                                 class="col-md-4 col-form-label text-md-end">{{ __('ID Image') }}</label>
 
                                             <div class="col-md-8">
-                                                <input id="proof_id_filename" type="file" onchange="document.getElementById('proof_id_filename_preview').src = window.URL.createObjectURL(this.files[0])"
+                                                <input id="proof_id_filename" type="file"
+                                                    onchange="document.getElementById('proof_id_filename_preview').src = window.URL.createObjectURL(this.files[0])"
                                                     class="form-control @error('proof_id_filename_title') is-invalid @enderror"
                                                     name="proof_id_filename" value="{{ old('proof_id_filename') }}"
                                                     required autocomplete="proof_id_filename_title">
@@ -247,7 +274,7 @@
     <script>
         $(document).ready(function() {
             document.getElementById('birthdate').value = "2000-01-01";;
-            
+
         });
     </script>
 @endsection

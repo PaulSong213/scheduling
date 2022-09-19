@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->String('filename name')->nullable()->change();
+            $table->string('phone_number');
         });
     }
 
@@ -28,6 +28,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
+            $table->dropColumn('phone_number');
         });
     }
 };

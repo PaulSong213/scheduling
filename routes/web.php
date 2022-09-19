@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OfficialsController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,13 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $officials = DB::table('officials')
+        ->join('users', 'officials.user_id', '=', 'users.id')
+        ->select('officials.*', 'users.*')
+        ->orderBy('position_level')
+        ->get();
+    return view('welcome')
+        ->with('officials', $officials);
 });
 
 Auth::routes();
@@ -35,5 +42,4 @@ Route::get('/residentRegister',  [App\Http\Controllers\UserController::class, 'r
 Route::post('/residentRegisterCreate',  [App\Http\Controllers\UserController::class, 'residentRegisterCreate'])->name('residentRegisterCreate');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
+Route::get('/twilio/sendSMS/{sms}/{number}', [App\Http\Controllers\TwilioController::class, 'sendSMS'])->name('sendSMS');

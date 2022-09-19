@@ -48,6 +48,10 @@
             left: 50%;
             transform: translate(-50%, -50%)
         }
+
+        .w-max {
+            width: max-content;
+        }
     </style>
 
 
@@ -90,11 +94,12 @@
                         @else
                             <li class="nav-item dropdown d-flex">
                                 <div class="shadow-sm border profile-container my-auto">
-                                    <img class="profile-image" src="/storage/{{Auth::user()->profile_filename  }} " />
+                                    <img class="profile-image" src="/storage/{{ Auth::user()->profile_filename }} " />
                                 </div>
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->first_name.' '.Auth::user()->last_name }}
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#"
+                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    v-pre>
+                                    {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
