@@ -52,6 +52,19 @@
         .w-max {
             width: max-content;
         }
+
+        .message {
+            border-radius: 0.4rem;
+            border: 1px rgba(0,0,0,0.1) solid;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            font-weight: 700;
+        }
+
+        .message-error {
+            background-color: rgba(224, 99, 99, 0.6);
+        }
+
     </style>
 
 

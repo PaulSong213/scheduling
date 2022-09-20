@@ -21,9 +21,9 @@
             }
         }
     </style>
-    @if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
-@endif
+
+
+
     <section class="h-100 gradient-form mx-auto py-3">
         <div class="container h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -31,6 +31,7 @@
                     <div class="card rounded-3 text-black">
                         <div class="row g-0">
                             <div class="col-lg-8">
+
                                 <div class="card-body p-md-5 mx-md-4">
 
                                     <div class="text-center">
@@ -38,7 +39,10 @@
                                         <h4 class="mt-1 mb-5 pb-1">Create Account for Barangay Manuyo Dos Online Public
                                             Files Request System</h4>
                                     </div>
-
+                                    @if ($errors->any())
+                                        {{ implode('', $errors->all('<div class="message message-error">:message</div>')) }}
+                                    @endif
+                                    
                                     <form role="form" action="{{ route('residentRegisterCreate') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
@@ -143,8 +147,8 @@
                                                     </div>
                                                     <input id="cellphone_number" type="text"
                                                         class="form-control @error('cellphone_number') is-invalid @enderror"
-                                                        name="cellphone_number" value="{{ old('cellphone_number') }}" required
-                                                        autocomplete="cellphone_number">
+                                                        name="cellphone_number" value="{{ old('cellphone_number') }}"
+                                                        required autocomplete="cellphone_number">
                                                 </div>
                                                 @error('cellphone_number')
                                                     <span class="invalid-feedback" role="alert">

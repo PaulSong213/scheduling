@@ -105,15 +105,6 @@ class UserController extends Controller
         $validated = $request->validate([
             'email' => 'required|unique:users',
             'password' => 'required|confirmed|min:6',
-            'cellphone_number' => 'required',
-            'proof_id_filename_title' => [
-                'required',
-                'alpha_dash', // This is your custom rule
-            ],
-            'profile_filename_title' => [
-                'required',
-                'alpha_dash', // This is your custom rule
-            ],
         ]);
 
         $request->proof_id_filename->storeAs('public', $proof_id_full);
