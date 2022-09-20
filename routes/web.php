@@ -42,10 +42,7 @@ Route::get('/residentRegister',  [App\Http\Controllers\UserController::class, 'r
 Route::post('/residentRegisterCreate',  [App\Http\Controllers\UserController::class, 'residentRegisterCreate'])->name('residentRegisterCreate');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-<<<<<<< HEAD
 Route::get('/officials', [App\Http\Controllers\OfficialsController::class, 'index'])->name('officials');
 Route::get('/permits', [App\Http\Controllers\PermitsController::class, 'index'])->name('permits');
 Route::get('/events', [App\Http\Controllers\EventsController::class, 'index'])->name('events');
-=======
 Route::get('/twilio/sendSMS/{sms}/{number}', [App\Http\Controllers\TwilioController::class, 'sendSMS'])->name('sendSMS');
->>>>>>> 306a94bbf676d5bda8b8dd3d89dbec5a7804d26b
