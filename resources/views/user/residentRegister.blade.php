@@ -33,16 +33,17 @@
                             <div class="col-lg-8">
 
                                 <div class="card-body p-md-5 mx-md-4">
-
                                     <div class="text-center">
                                         <img src="/images/logo.jpg" style="width: 105px;" alt="logo">
                                         <h4 class="mt-1 mb-5 pb-1">Create Account for Barangay Manuyo Dos Online Public
                                             Files Request System</h4>
                                     </div>
                                     @if ($errors->any())
-                                        {{ implode('', $errors->all('<div class="message message-error">:message</div>')) }}
+                                        <div class="message message-error">
+                                            {{ implode('', $errors->all(':message')) }}
+                                        </div>
                                     @endif
-                                    
+
                                     <form role="form" action="{{ route('residentRegisterCreate') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
@@ -277,8 +278,7 @@
     </section>
     <script>
         $(document).ready(function() {
-            document.getElementById('birthdate').value = "2000-01-01";;
-
+            document.getElementById('birthdate').value = "2000-01-01";
         });
     </script>
 @endsection
