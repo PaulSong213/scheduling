@@ -74,8 +74,9 @@
     <div id="app" class="min-vh-100 d-flex flex-column">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Manuyo Dos
+                <a class="navbar-brand d-flex gap-2" href="{{ url('/') }}">
+                    <img style="height: 2rem" src="/images/logo.jpg">
+                    <span class="d-block my-auto">Manuyo Dos</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OfficialsController;
+use App\Http\Controllers\RequestController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,19 +25,23 @@ Route::get('/', function () {
         ->select('officials.*', 'users.*')
         ->orderBy('position_level')
         ->get();
+    $events = DB::table('events')
+        ->select()
+        ->orderBy('date')
+        ->get();
+    
     return view('welcome')
-        ->with('officials', $officials);
+        ->with('officials', $officials)
+        ->with('events', $events);
 });
 
 Auth::routes();
 
 
-Route::resource('user', UserController::class);
-Route::resource('officials', OfficialsController::class);
+
 
 //costum pages
 Route::get('/smsRedirect', [App\Http\Controllers\UserController::class, 'smsRedirect'])->name('SMS Redirect');
-Route::get('/globelabSuccess/{access_token}/{subscriber_number}', [App\Http\Controllers\UserController::class, 'globelabSuccess'])->name('globelabSuccess');
 Route::get('/globelabSave', [App\Http\Controllers\UserController::class, 'globelabSave'])->name('globelabSave');
 Route::get('/residentRegister',  [App\Http\Controllers\UserController::class, 'residentRegister'])->name('residentRegister');
 Route::post('/residentRegisterCreate',  [App\Http\Controllers\UserController::class, 'residentRegisterCreate'])->name('residentRegisterCreate');
@@ -46,3 +51,15 @@ Route::get('/officials', [App\Http\Controllers\OfficialsController::class, 'inde
 Route::get('/permits', [App\Http\Controllers\PermitsController::class, 'index'])->name('permits');
 Route::get('/events', [App\Http\Controllers\EventsController::class, 'index'])->name('events');
 Route::get('/twilio/sendSMS/{sms}/{number}', [App\Http\Controllers\TwilioController::class, 'sendSMS'])->name('sendSMS');
+
+
+//requests
+Route::get('/request/credential/{type}', [App\Http\Controllers\RequestController::class, 'credential'])->name('credential');
+
+Route::get('/request/permit', [App\Http\Controllers\RequestController::class, 'permit'])->name('permit');
+
+//default routes
+Route::resource('user', UserController::class);
+Route::resource('officials', OfficialsController::class);
+Route::resource('request', RequestController::class);
+
