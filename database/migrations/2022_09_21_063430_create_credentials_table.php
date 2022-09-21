@@ -13,10 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clearances', function (Blueprint $table) {
+        Schema::create('credentials', function (Blueprint $table) {
             $table->id();
             $table->string('purpose');
+            $table->bigInteger('user_id');
             $table->string('payment_proof_filename');
+            $table->string('decline_reason')->nullable();
+            $table->date('scheduled_date')->nullable();
+            $table->enum('status', ['pending', 'scheduled','declined'])->default('pending');
+            $table->enum('credential_type', ['Barangay Clearance', 'Barangay ID','Barangay Certificate'])->default('Barangay Clearance');
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clearances');
+        Schema::dropIfExists('credentials');
     }
 };

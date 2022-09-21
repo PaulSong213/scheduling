@@ -54,9 +54,13 @@ Route::get('/twilio/sendSMS/{sms}/{number}', [App\Http\Controllers\TwilioControl
 
 
 //requests
-Route::get('/request/credential/{type}', [App\Http\Controllers\RequestController::class, 'credential'])->name('credential');
-
+Route::get('/request/credential/{type}', [App\Http\Controllers\RequestController::class, 'credential'])->name('credential')->whereIn('type', ['Clearance', 'ID', 'Certificate']);;
 Route::get('/request/permit', [App\Http\Controllers\RequestController::class, 'permit'])->name('permit');
+Route::post('/request/addCredential',  [App\Http\Controllers\RequestController::class, 'addCredential'])->name('addCredential');
+
+Route::get('/request/success',  function() {
+    return view('request.success');
+});
 
 //default routes
 Route::resource('user', UserController::class);
