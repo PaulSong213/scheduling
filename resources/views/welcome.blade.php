@@ -43,17 +43,17 @@
                         $services = [
                             'clearance' => [
                                 'title' => 'Barangay Clearance',
-                                'path' => '/request/credential/clearance',
+                                'path' => '/request/credential/Clearance',
                                 'icon' => 'bi bi-file-earmark-break-fill',
                             ],
                             'id' => [
                                 'title' => 'Barangay ID Card',
-                                'path' => '/request/credential/id',
+                                'path' => '/request/credential/ID',
                                 'icon' => 'bi bi-person-square',
                             ],
                             'certificate' => [
                                 'title' => 'Barangay Certificate',
-                                'path' => '/request/credential/certificate',
+                                'path' => '/request/credential/Certificate',
                                 'icon' => 'bi bi-blockquote-right',
                             ],
                             'permits' => [

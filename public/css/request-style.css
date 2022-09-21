@@ -1,0 +1,6 @@
+.personal-information-container {
+    background-color: rgba(153, 209, 166, 0.3);
+    border-left: 5px rgba(153, 209, 166, 1) solid;
+    padding: 0.8rem 1rem;
+    border-radius: 0.3rem;
+}

@@ -91,7 +91,7 @@ class UserController extends Controller
 
         Auth::login($new_user);
 
-        return redirect('/home');
+        return redirect('/request');
     }
 
     public function residentRegister()
