@@ -7,10 +7,35 @@ $pages = [
         'path' => '/home',
         'icon' => 'bi bi-grid-1x2-fill',
     ],
+    'clearance' => [
+        'title' => 'Barangay Clearance',
+        'path' => '/clearance',
+        'icon' => 'bi bi-file-earmark-break-fill',
+    ],
+    'id' => [
+        'title' => 'Barangay ID Card',
+        'path' => '/id',
+        'icon' => 'bi bi-person-square',
+    ],
+    'certificate' => [
+        'title' => 'Barangay Certificate',
+        'path' => '/brgycert',
+        'icon' => 'bi bi-blockquote-right',
+    ],
     'officials' => [
         'title' => 'Officials',
         'path' => '/officials',
         'icon' => 'bi bi-person-square',
+    ],
+    'permits' => [
+        'title' => 'Permits',
+        'path' => '/permits',
+        'icon' => 'bi bi-file-text',
+    ],
+    'events' => [
+        'title' => 'Events',
+        'path' => '/events',
+        'icon' => 'bi bi-calendar3',
     ],
 ];
 

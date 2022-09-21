@@ -11,22 +11,22 @@
                         <div class="mb-3">
                             <label>Type of Permit
                             </label>
-                            <input type="text" wire:mode="permitType" class="form-control">
+                            <input type="text" wire:model="permitType" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label>Name of resident
                             </label>
-                            <input type="text" wire:mode="nameOfResident" class="form-control">
+                            <input type="text" wire:model="nameOfResident" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label>Processing Fee
                             </label>
-                            <input type="text" wire:mode="processingFee" class="form-control">
+                            <input type="text" wire:model="processingFee" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label>Date of Request
                             </label>
-                            <input type="text" wire:mode="date" class="form-control">
+                            <input type="text" wire:model="date" class="form-control">
                         </div>
                     </div>
                 </form>

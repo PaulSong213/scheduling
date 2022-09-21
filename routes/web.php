@@ -50,6 +50,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/officials', [App\Http\Controllers\OfficialsController::class, 'index'])->name('officials');
 Route::get('/permits', [App\Http\Controllers\PermitsController::class, 'index'])->name('permits');
 Route::get('/events', [App\Http\Controllers\EventsController::class, 'index'])->name('events');
+Route::get('/brgycert', [App\Http\Controllers\BrgyCertController::class, 'index'])->name('brgycert');
+Route::get('/clearance', [App\Http\Controllers\ClearanceController::class, 'index'])->name('clearance');
+Route::get('/id', [App\Http\Controllers\IDController::class, 'index'])->name('id');
+
 Route::get('/twilio/sendSMS/{sms}/{number}', [App\Http\Controllers\TwilioController::class, 'sendSMS'])->name('sendSMS');
 
 

@@ -5,19 +5,9 @@
         <div class="row flex-nowrap h-100">
             @include('layouts.sidebar')
             <div class="col px-4 py-4 ">
-                <livewire:officials-show>
+                <h4>brgycert</h4>
             </div>
         </div>
     </div>
     
-@endsection
-
-@section('script')
-
-<script>
-    window.addEventListener('close-modal', event =>{
-       $('#officialsModal').modal('hide');
-    })
-
-</script>
 @endsection
