@@ -94,7 +94,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        @if (Auth::check())
+                        @if (Auth::guard('web')->check())
                             {{-- User authenticated --}}
                             <li class="nav-item dropdown d-flex" id="navbarDropdown">
                                 <div class="shadow-sm border profile-container my-auto">
@@ -119,6 +119,7 @@
                                 </div>
                             </li>
                         @elseif(Auth::guard('official')->check())
+                            test
                             {{-- Official authenticated --}}
                             <li class="nav-item dropdown d-flex" id="navbarDropdown">
                                 <div class="shadow-sm border profile-container my-auto">
@@ -131,13 +132,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="{{ route('logoutOfficial') }}"
                                         onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form-official').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logoutOfficial') }}" method="POST" class="d-none">
+                                    <form id="logout-form-official" action="{{ route('logoutOfficial') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>

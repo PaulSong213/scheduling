@@ -67,9 +67,5 @@ class LoginController extends Controller
         ])->onlyInput('email');
     }
 
-    public function logoutOfficial(){
-        Auth::guard('official')->logout();
-        return redirect('/login');
-    }
 
 }
