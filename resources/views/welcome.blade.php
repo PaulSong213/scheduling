@@ -99,6 +99,7 @@
                                             style="border-radius: 10px">
                                             <div class="px-4 mx-auto mb-5 mb-lg-0 mb-lg-3">
                                                 <div class="event-image-container ">
+                                                    
                                                     <img class="event-image"
                                                         src="/storage/{{ $event->thumbnail_filename }}">
                                                 </div>
