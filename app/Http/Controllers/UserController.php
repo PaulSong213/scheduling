@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Rules\Filename;
 use Illuminate\Support\Facades\Hash;
 use Twilio\Rest\Client;
+
 class UserController extends Controller
 {
-    public $sid    = "AC0ee01350a558384959c64af938e2d4ca"; 
-    public $token  = "4e272864a7cb41c73cd9c47873b9b92a"; 
+    public $sid    = "AC0ee01350a558384959c64af938e2d4ca";
+    public $token  = "4e272864a7cb41c73cd9c47873b9b92a";
 
     public function index()
     {
@@ -68,14 +69,14 @@ class UserController extends Controller
         }
 
         $validated = $request->validate([
-            'email' => 'required|unique:users',
+            'email' => 'required|unique:users|unique:officials',
             'password' => 'required|confirmed|min:6',
         ]);
 
         $request->proof_id_filename->storeAs('public', $proof_id_full);
         $request->profile_filename->storeAs('public', $profile_full);
 
-        $complete_phone_number = "+63".$request->input('cellphone_number');
+        $complete_phone_number = "+63" . $request->input('cellphone_number');
 
         $new_user = User::create([
             'cellphone_number' => $complete_phone_number,
@@ -89,18 +90,23 @@ class UserController extends Controller
             'profile_filename' => $profile_full,
         ]);
 
+        //log in if official
+        // if (Auth::guard('official')->attempt(['email' => $request->input('email'), 'password' => $request->input('password') ], $request->get('remember'))) {
+        //     Auth::guard('official')->login($new_user);
+        //     return redirect()->intended('/home');
+        //     die();
+        // }
+        
         Auth::login($new_user);
-
         return redirect('/request');
     }
 
     public function residentRegister()
     {
-        if (Auth::check()) {
+        if (Auth::check() || Auth::guard('official')->check() ) {
             return redirect('/home');
             die();
         }
         return view('user.residentRegister');
     }
-
 }

@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\Officials;
+use App\Models\User;
 class LoginController extends Controller
 {
     /*
@@ -26,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = "/request";
 
     /**
      * Create a new controller instance.
@@ -36,5 +39,37 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        //$this->middleware('guest:official')->except('logout');
     }
+
+    public function multiLogin(Request $request)
+    {
+
+        if ($res = Auth::guard('official')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], true )) {
+            $official = new Officials($request->all());
+            //log in if official
+            $request->session()->regenerate();
+            //Auth::guard('official')->login($official);
+            Auth::setUser($official);
+            return redirect()->intended('/home');
+            die();
+        } else if (Auth::guard('web')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], true )) {
+            // user log in
+            $user = new User($request->all());
+            $request->session()->regenerate();
+            //Auth::guard('web')->login($user);
+            Auth::setUser($user);
+            return redirect()->intended('/request');
+            die();
+        }
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
+    public function logoutOfficial(){
+        Auth::guard('official')->logout();
+        return redirect('/login');
+    }
+
 }

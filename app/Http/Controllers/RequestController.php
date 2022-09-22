@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Credentials;
-use Auth;
+use App\Models\Permits;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RequestController extends Controller
@@ -26,8 +27,12 @@ class RequestController extends Controller
             ->select('credentials.*', 'users.*')
             ->where('credentials.user_id', '=', Auth::user()->id)
             ->get();
+        $permits = DB::table('permits')
+            ->where('permits.user_id', '=', Auth::user()->id)
+            ->get();
         return view('request.index')
-            ->with('credentials', $credentials);
+            ->with('credentials', $credentials)
+            ->with('permits', $permits);
     }
 
     public function credential($type)
@@ -43,16 +48,19 @@ class RequestController extends Controller
 
     public function addCredential(Request $request)
     {
+        $payment_proof_full = null;
+        if ($request->payment_proof_filename) {
+            $arr_payment_proof_filename = explode(".", $request->payment_proof_filename->getClientOriginalName());
 
-        $arr_payment_proof_filename = explode(".", $request->payment_proof_filename->getClientOriginalName());
+            $payment_proof_filename_ext = $arr_payment_proof_filename[sizeof($arr_payment_proof_filename) - 1];
 
-        $payment_proof_filename_ext = $arr_payment_proof_filename[1];
+            $request['payment_proof_filename_title'] = $this->randText();
 
-        $request['payment_proof_filename_title'] = $this->randText();
+            $payment_proof_full = $request['payment_proof_filename_title'] . '.' . $payment_proof_filename_ext;
 
-        $payment_proof_full = $request['payment_proof_filename_title'] . '.' . $payment_proof_filename_ext;
+            $request->payment_proof_filename->storeAs('public', $payment_proof_full);
+        }
 
-        $request->payment_proof_filename->storeAs('public', $payment_proof_full);
         try {
             Credentials::create([
                 'purpose' => $request->input('purpose'),
@@ -60,6 +68,41 @@ class RequestController extends Controller
                 'payment_proof_filename' => $payment_proof_full,
                 'status' => "pending",
                 'credential_type' => $request->input('credential_type'),
+            ]);
+            return redirect('/request/success');
+        } catch (\Illuminate\Database\QueryException $exception) {
+            $errorInfo = $exception->errorInfo;
+            return redirect()
+                ->back()
+                ->withInput($request->input())
+                ->with('errorInfo', $errorInfo);
+        }
+    }
+
+    public function addPermit(Request $request)
+    {
+
+        $payment_proof_full = null;
+        if ($request->payment_proof_filename) {
+            $arr_payment_proof_filename = explode(".", $request->payment_proof_filename->getClientOriginalName());
+
+            $payment_proof_filename_ext = $arr_payment_proof_filename[sizeof($arr_payment_proof_filename) - 1];
+
+            $request['payment_proof_filename_title'] = $this->randText();
+
+            $payment_proof_full = $request['payment_proof_filename_title'] . '.' . $payment_proof_filename_ext;
+
+            $request->payment_proof_filename->storeAs('public', $payment_proof_full);
+        }
+
+        try {
+            Permits::create([
+                'user_id' => Auth::user()->id,
+                'business_location' => $request->input('business_location'),
+                'business_type' => $request->input('business_type'),
+                'business_name' => $request->input('business_name'),
+                'payment_proof_filename' => $payment_proof_full,
+                'status' => "pending",
             ]);
             return redirect('/request/success');
         } catch (\Illuminate\Database\QueryException $exception) {

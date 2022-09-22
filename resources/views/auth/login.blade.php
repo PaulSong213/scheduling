@@ -33,7 +33,7 @@
                                         style="width: 105px;" alt="logo">
                                     <h4 class="mt-1 mb-5 pb-1">Log in for Barangay Manuyo Dos Online Public Files Request System</h4>
                                 </div>
-                                <form method="POST" action="{{ route('login') }}">
+                                <form method="POST" action="{{ route('multiLogin') }}">
                                     @csrf
                                 
                                     <div class="row mb-3">

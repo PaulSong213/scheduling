@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('purpose');
             $table->bigInteger('user_id');
-            $table->string('payment_proof_filename');
+            $table->string('payment_proof_filename')->nullable();
             $table->string('decline_reason')->nullable();
             $table->date('scheduled_date')->nullable();
             $table->enum('status', ['pending', 'scheduled','declined'])->default('pending');

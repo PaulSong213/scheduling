@@ -31,7 +31,7 @@
                                 <div class="form-text">Purpose of getting a Barangay Clearance (Job Application, Educational
                                     Assisstance, etc.) </div>
                             </div>
-
+                            @if ( $type ==  'ID' )
                             <div class="row my-4">
                                 <div class="row mb-2">
                                     <div class="col-md-12">
@@ -45,7 +45,7 @@
                                 <div class="row">
                                     <label for="proof_payment_filename"
                                         class="col-md-12 col-form-label">{{ __('Proof of Payment Screenshot (GCash)') }}
-                                        <span class="text-danger fw-bold">Send your payment to GCash # 0987654321 Eduardo R.
+                                        <span class="text-primary fw-bold">Send your  ₱50 payment to GCash # 0987654321 Eduardo R.
                                             Timbungco </span>
                                     </label>
 
@@ -64,6 +64,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
 
                             <section class="mb-4 personal-information-container">
                                 <h5 class="fw-bold text-success">Personal Information</h5>

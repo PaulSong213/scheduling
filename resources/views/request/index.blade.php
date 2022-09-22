@@ -40,7 +40,7 @@ $services = [
                                         <table id="example" class="table table-striped" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Type</th>
+                                                    <th>Information</th>
                                                     <th>Status</th>
                                                     <th>Schedule Date</th>
                                                     <th>Remarks</th>
@@ -56,15 +56,63 @@ $services = [
                                             <tbody>
                                                 @foreach ($credentials as $credential)
                                                     <tr>
-                                                        <td> {{ $credential->credential_type }} </td>
+                                                        <td style="max-width: 150px; background-color: rgb(242, 247, 244)">
+                                                            <div>
+                                                                <span>Type: </span>
+                                                                <span
+                                                                    class="fw-bold">{{ $credential->credential_type }}</span>
+                                                            </div>
+                                                            <div>
+                                                                <span>Purpose: </span>
+                                                                <span
+                                                                   >{{ $credential->purpose }}</span>
+                                                            </div>
+                                                        </td>
                                                         <td class="text-capitalize  ">
-                                                            <span style="width: 100px" class="{{ $status_color[$credential->status] }} fw-bold">
+                                                            <span style="width: 100px"
+                                                                class="{{ $status_color[$credential->status] }} fw-bold">
                                                                 {{ $credential->status }}
                                                             </span>
                                                         </td>
                                                         <td> {{ isset($credential->scheduled_date) ? date('M d, Y - D', strtotime($credential->scheduled_date)) : '' }}
                                                         </td>
-                                                        <td style="max-width: 200px"> {{ $credential->status == 'scheduled' ? 'You can get your requested document on assigned scheduled date at Barangay Hall of Manuyo Dos' : $credential->decline_reason  }} </td>
+                                                        <td style="max-width: 200px">
+                                                            {{ $credential->status == 'scheduled' ? 'You can get your requested document on assigned scheduled date at Barangay Hall of Manuyo Dos' : $credential->decline_reason }}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                @foreach ($permits as $permit)
+                                                    <tr>
+                                                        <td style="max-width: 150px; background-color: rgb(242, 247, 244)">
+                                                            <div>
+                                                                <span>Type: </span>
+                                                                <span class="fw-bold">Permit</span>
+                                                            </div>
+                                                            <div>
+                                                                <span>Business Name: </span>
+                                                                <span > {{ $permit->business_name }} </span>
+                                                            </div> 
+                                                            <div>
+                                                                <span>Business Type: </span>
+                                                                <span > {{ $permit->business_type }} </span>
+                                                            </div> 
+                                                            <div>
+                                                                <span>Business Location: </span>
+                                                                <span> {{ $permit->business_location }} </span>
+                                                            </div> 
+                                                            
+                                                        </td>
+                                                        <td class="text-capitalize  ">
+                                                            <span style="width: 100px"
+                                                                class="{{ $status_color[$permit->status] }} fw-bold">
+                                                                {{ $permit->status }}
+                                                            </span>
+                                                        </td>
+                                                        <td> {{ isset($permit->scheduled_date) ? date('M d, Y - D', strtotime($permit->scheduled_date)) : '' }}
+                                                        </td>
+                                                        <td style="max-width: 200px">
+                                                            {{ $permit->status == 'scheduled' ? 'You can get your requested document on assigned scheduled date at Barangay Hall of Manuyo Dos' : $permit->decline_reason }}
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             <tbody>

@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('credentials', function (Blueprint $table) {
+        Schema::create('permits', function (Blueprint $table) {
             $table->id();
-            $table->string('purpose');
-            $table->bigInteger('user_id');
+            $table->string('user_id');
+            $table->string('business_location');
+            $table->string('business_type');
+            $table->string('business_name');
             $table->string('payment_proof_filename');
             $table->string('decline_reason')->nullable();
             $table->date('scheduled_date')->nullable();
             $table->enum('status', ['pending', 'scheduled','declined'])->default('pending');
-            $table->enum('credential_type', ['Barangay Clearance', 'Barangay ID','Barangay Certificate'])->default('Barangay Clearance');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('credentials');
+        Schema::dropIfExists('permits');
     }
 };

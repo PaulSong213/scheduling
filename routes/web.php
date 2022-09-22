@@ -7,7 +7,7 @@ use App\Http\Controllers\RequestController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,8 +21,6 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     $officials = DB::table('officials')
-        ->join('users', 'officials.user_id', '=', 'users.id')
-        ->select('officials.*', 'users.*')
         ->orderBy('position_level')
         ->get();
     $events = DB::table('events')
@@ -61,10 +59,15 @@ Route::get('/twilio/sendSMS/{sms}/{number}', [App\Http\Controllers\TwilioControl
 Route::get('/request/credential/{type}', [App\Http\Controllers\RequestController::class, 'credential'])->name('credential')->whereIn('type', ['Clearance', 'ID', 'Certificate']);;
 Route::get('/request/permit', [App\Http\Controllers\RequestController::class, 'permit'])->name('permit');
 Route::post('/request/addCredential',  [App\Http\Controllers\RequestController::class, 'addCredential'])->name('addCredential');
+Route::post('/request/addPermit',  [App\Http\Controllers\RequestController::class, 'addPermit'])->name('addPermit');
 
 Route::get('/request/success',  function() {
     return view('request.success');
 });
+
+//constum auth
+Route::post('/multiLogin',  [App\Http\Controllers\Auth\LoginController::class, 'multiLogin'])->name('multiLogin');
+Route::post('/logoutOfficial',  [App\Http\Controllers\Auth\LoginController::class, 'logoutOfficial'])->name('logoutOfficial');
 
 //default routes
 Route::resource('user', UserController::class);
