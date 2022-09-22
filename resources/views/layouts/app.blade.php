@@ -119,7 +119,7 @@
                                 </div>
                             </li>
                         @elseif(Auth::guard('official')->check())
-                            test
+                           
                             {{-- Official authenticated --}}
                             <li class="nav-item dropdown d-flex" id="navbarDropdown">
                                 <div class="shadow-sm border profile-container my-auto">

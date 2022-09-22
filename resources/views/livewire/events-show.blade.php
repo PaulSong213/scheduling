@@ -3,11 +3,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if (session() -> has('message'))
+                    <h5 class="alert alert-success">{{ session('message')}}</h5>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h4>Events
                             <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
-                            data-bs-target="#permitsModal">
+                            data-bs-target="#eventsModal">
                             Create Event
                         </button>
                         </h4>

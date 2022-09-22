@@ -12,8 +12,10 @@ class Events extends Model
     protected $table = 'events';
 
     protected $fillable = [
-        'name',
+        'event_name',
         'date',
         'venue',
+        'purpose',
+        'event_filename'
     ];
 }

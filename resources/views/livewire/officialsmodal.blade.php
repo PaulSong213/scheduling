@@ -26,7 +26,7 @@
                             <label>Position
                             </label>
                             <input type="text" wire:model="position" class="form-control">
-                            @error('position ') <span class="text-danger">{{ $message }}</span> @enderror
+                            @error('position') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-3">
                             <label>Position Level
