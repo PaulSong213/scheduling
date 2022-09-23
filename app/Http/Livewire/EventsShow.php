@@ -8,6 +8,8 @@ use Livewire\WithFileUploads;
 class EventsShow extends Component
 {
     use WithFileUploads;
+    
+    public $events;
     public $event_name, $venue, $purpose, $date, $event_filename;
     
     protected function rules()
@@ -53,6 +55,8 @@ class EventsShow extends Component
 
     public function render()
     {
-        return view('livewire.events-show');
+        $this->events = Events::all();
+        
+        return view('livewire.events-show', [$this->events]);
     }
 }

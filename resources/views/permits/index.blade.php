@@ -5,7 +5,7 @@
         <div class="row flex-nowrap h-100">
             @include('layouts.sidebar')
             <div class="col px-4 py-4 ">
-                <livewire:permits>
+                <livewire:permits-show>
             </div>
         </div>
     </div>

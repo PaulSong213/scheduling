@@ -5,7 +5,7 @@
                 <h5 class="modal-title" id="officialsModalLabel">Add Official</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form wire:submit.prevent="saveOfficials">
+            <form wire:submit.prevent="saveOfficials" enctype="multipart/form-data">
                 <div class="modal-body">
 
                     <div class="modal-body">
@@ -54,7 +54,14 @@
                         <div class="mb-3">
                             <label>Civil Status
                             </label>
-                            <input type="text" wire:model="civilStatus" class="form-control">
+                            <select name="civilStatus" id="civilStatus" wire:model="civilStatus">
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Separated">Separated</option>
+                                <option value="Widowed">Widowed</option>
+                                <option value="Civil Partnership">Civil Partnership</option>
+                            </select>
                             @error('civilStatus') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-3">
@@ -63,16 +70,31 @@
                             <input type="date" wire:model="birthdate" class="form-control">
                             @error('birthdate') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
-                        <div class="mb-3">
-                            <label>Cellphone Number
-                            </label>
-                            <input type="text" wire:model="cellphone_number" class="form-control">
-                            @error('cellphone_number') <span class="text-danger">{{ $message }}}</span> @enderror
-                        </div>
+                        <div class="row mb-3">
+                                            <label for="phone_number"
+                                                class="col-md-4 col-form-label  ">{{ __('Phone Number') }}</label>
+
+                                            <div class="col-md-12">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">+63</span>
+                                                    </div>
+                                                    <input id="cellphone_number" type="text" wire:model="email"
+                                                        class="form-control @error('cellphone_number') is-invalid @enderror"
+                                                        name="cellphone_number" value="{{ old('cellphone_number') }}"
+                                                        required autocomplete="cellphone_number">
+                                                </div>
+                                                @error('cellphone_number')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                         <div class="mb-3">
                             <label>Email
                             </label>
-                            <input type="text" wire:model="email" class="form-control">
+                            <input type="email" wire:model="email" class="form-control">
                             @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-3">
@@ -85,7 +107,7 @@
                             <label>{{ __('ID Image') }}</label>
 
                             <div class="md-8">
-                                <input id="proof_id_filename" type="file" onchange="document.getElementById('proof_id_filename_preview').src = window.URL.createObjectURL(this.files[0])" class="form-control @error('proof_id_filename_title') is-invalid @enderror" name="proof_id_filename" value="{{ old('proof_id_filename') }}" required autocomplete="proof_id_filename_title">
+                                <input id="proof_id_filename" type="file"  wire:model="profile_filename" onchange="document.getElementById('proof_id_filename_preview').src = window.URL.createObjectURL(this.files[0])" class="form-control @error('proof_id_filename_title') is-invalid @enderror" name="proof_id_filename" value="{{ old('proof_id_filename') }}" required autocomplete="proof_id_filename_title">
                                 <small>Image of your ID that contains the Address of Barangay Manuyo</small>
 
                                 @error('proof_id_filename')
@@ -99,7 +121,7 @@
                             <label >{{ __('Password') }}</label>
 
                             <div class="col-md-8">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password"  wire:model="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -117,7 +139,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="hidden" wire:model="userType" class="form-control">
+                            <input type="hidden" wire:model="userType" class="form-control" value="admin">
                             @error('userType') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>

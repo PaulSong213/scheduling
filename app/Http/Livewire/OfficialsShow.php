@@ -4,10 +4,11 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Officials;
-
+use Livewire\WithFileUploads;
 class OfficialsShow extends Component
 {
 
+    use WithFileUploads;
     public $first_name,$last_name, $position,$position_level,
     $department,$civilStatus,
      $birthdate, $cellphone_number, $email,
@@ -17,17 +18,20 @@ class OfficialsShow extends Component
     protected function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'position' => 'required',
-            'position_level' => 'required',
-            'department' => 'required',
-            'civilStatus' => 'required',
-            'birthdate' => 'required',
-            'cellphone_number' => 'required|numeric',
-            'email' => 'required',
-            'profile_filename' => 'required',
-            'address' => 'required',
+            'first_name' => '',
+            'last_name' => '',
+            'position' => '',
+            'position_level' => '',
+            'department' => '',
+            'civilStatus' => '',
+            'birthdate' => '',
+            'cellphone_number' => '',
+            'email' => '',
+            'profile_filename' => '',
+            'userType' => '',
+            'address' => '',
+            'password' => '',
+
            
 
         ];
@@ -39,7 +43,13 @@ class OfficialsShow extends Component
 
     public function saveOfficials()
     {
+        $t =  $this->profile_filename->storePublicly('public');
+        
+        $a =  "admin";   
+
         $validatedData = $this->validate();
+        $validatedData['userType']= $a;
+        $validatedData['profile_filename']= $t;
         Officials::create($validatedData);
         session()->flash('message', 'Officials added successfully');
         $this->resetInput();
@@ -62,6 +72,7 @@ class OfficialsShow extends Component
 
     public function render()
     {
-        return view('livewire.officials-show');
+        $this->officials = Officials::all();
+        return view('livewire.officials-show', [$this->officials]);
     }
 }
