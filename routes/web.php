@@ -39,8 +39,6 @@ Auth::routes();
 
 
 //costum pages
-Route::get('/smsRedirect', [App\Http\Controllers\UserController::class, 'smsRedirect'])->name('SMS Redirect');
-Route::get('/globelabSave', [App\Http\Controllers\UserController::class, 'globelabSave'])->name('globelabSave');
 Route::get('/residentRegister',  [App\Http\Controllers\UserController::class, 'residentRegister'])->name('residentRegister');
 Route::post('/residentRegisterCreate',  [App\Http\Controllers\UserController::class, 'residentRegisterCreate'])->name('residentRegisterCreate');
 
@@ -52,7 +50,9 @@ Route::get('/brgycert', [App\Http\Controllers\BrgyCertController::class, 'index'
 Route::get('/clearance', [App\Http\Controllers\ClearanceController::class, 'index'])->name('clearance');
 Route::get('/id', [App\Http\Controllers\IDController::class, 'index'])->name('id');
 
-Route::get('/twilio/sendSMS/{sms}/{number}', [App\Http\Controllers\TwilioController::class, 'sendSMS'])->name('sendSMS');
+Route::get('/twilio/sendSMS/{sms}/{number}/{redirectRoute}', [App\Http\Controllers\TwilioController::class, 'sendSMS'])
+->name('sendSMS')
+->where('redirectRoute', '(.*)');;
 
 
 //requests

@@ -10,22 +10,30 @@ use Twilio\Rest\Client;
 class TwilioController extends Controller
 {
     //
-    public $sid    = "AC0ee01350a558384959c64af938e2d4ca"; 
-    public $token  = "4e272864a7cb41c73cd9c47873b9b92a"; 
-    
-
-    public function sendSMS($sms, $number)
+    public function sendSMS($sms, $number, $redirectRoute = "home" )
     {
-        $twilio = new Client($this->sid, $this->token); 
-        $message = $twilio->messages
-            ->create(
-                $number, // to 
-                array(
-                    "from" => "+18149925268",
-                    "body" => $sms
-                )
-            );
-        return view('twilio.sendSMS')->with('message_id', $message);
+        $twilio = new Client( \config('twilio.TWILIO_ACCOUNT_SID'), \config('twilio.TWILIO_AUTH_TOKEN'));
+        try {
+            $message = $twilio->messages
+                ->create(
+                    $number, // to 
+                    array(
+                        "from" => \config('twilio.TWILIO_PHONE_NUMBER'),
+                        "body" => $sms
+                    )
+                );
+            return view('twilio.sendSMS')
+                ->with('redirectRoute', $redirectRoute)
+                ->with('number', $number)
+                ->with('sms', $sms)
+                ->with('error_message', null);
+        } catch (Exception $e) {
+            $error_message = $e->getCode() . ' - ' . $e->getMessage();
+            return view('twilio.sendSMS')
+                ->with('redirectRoute', $redirectRoute)
+                ->with('number', $number)
+                ->with('sms', $sms)
+                ->with('error_message', $error_message);
+        }
     }
-
 }

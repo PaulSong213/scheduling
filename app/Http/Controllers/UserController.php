@@ -12,8 +12,6 @@ use Twilio\Rest\Client;
 
 class UserController extends Controller
 {
-    public $sid    = "AC0ee01350a558384959c64af938e2d4ca";
-    public $token  = "4e272864a7cb41c73cd9c47873b9b92a";
 
     public function index()
     {
@@ -97,13 +95,16 @@ class UserController extends Controller
         //     die();
         // }
         
-        Auth::login($new_user);
-        return redirect('/request');
+        Auth::guard('web')->login($new_user);
+        return redirect()->intended('/request');
     }
 
     public function residentRegister()
     {
-        if (Auth::check() || Auth::guard('official')->check() ) {
+        if (Auth::guard('web')->check()) {
+            return redirect('/request');
+            die();
+        }else if(Auth::guard('official')->check()){
             return redirect('/home');
             die();
         }

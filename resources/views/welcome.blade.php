@@ -101,9 +101,9 @@
                                                 <div class="event-image-container ">
                                                     
                                                     <img class="event-image"
-                                                        src="/storage/{{ $event->thumbnail_filename }}">
+                                                        src="{{ str_replace("public","storage",$event->event_filename) }}">
                                                 </div>
-                                                <h3 class="text-decoration-none"> {{ $event->name }} </h3>
+                                                <h3 class="text-decoration-none"> {{ $event->event_name }} </h3>
                                                 <div>
                                                     <span class="badge text-bg-success">Venue: {{ $event->venue }} </span>
                                                     <span class="badge text-bg-success">Date:
@@ -120,14 +120,14 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel"> {{ $event->name }}
+                                                    <h5 class="modal-title" id="exampleModalLabel"> {{ $event->event_name }}
                                                     </h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <img style="width: 100%"
-                                                        src="/storage/{{ $event->thumbnail_filename }}">
+                                                    src="{{ str_replace("public","storage",$event->event_filename) }}">
                                                     <div>
                                                         <span class="badge text-bg-success my-3">Venue: {{ $event->venue }}
                                                         </span>
@@ -135,7 +135,7 @@
                                                             {{ date('M d, Y - D', strtotime($event->date)) }} </span>
                                                     </div>
                                                     <p class="text-start fs-6">
-                                                        {{ $event->description }}
+                                                        {{ $event->purpose }}
                                                     </p>
                                                 </div>
                                                 <div class="modal-footer">
@@ -168,10 +168,11 @@
                                         <div class="testimonial-item mb-5 mb-lg-0">
                                             <div class="official-img-container mb-3">
                                                 <img class="official-img"
-                                                    src="/storage/{{ $official->profile_filename }} " />
+                                                src="{{ str_replace("public","storage",$official->profile_filename) }}" />
                                             </div>
-                                            <h3> {{ $official->first_name . ' ' . $official->last_name }} </h3>
-                                            <h5 class="fw-normal mb-0"> {{ $official->position }} </h5>
+                                            <h3 class="mb-0"> {{ $official->first_name . ' ' . $official->last_name }} </h3>
+                                            <h4 class="fw-normal mb-0"> {{ $official->position }} </h4>
+                                            <h5 class="fw-normal mb-0"> {{ $official->department }} </h5>
                                         </div>
                                     </div>
                                     @php

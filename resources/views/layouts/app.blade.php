@@ -123,7 +123,7 @@
                             {{-- Official authenticated --}}
                             <li class="nav-item dropdown d-flex" id="navbarDropdown">
                                 <div class="shadow-sm border profile-container my-auto">
-                                    <img class="profile-image" src="/storage/{{ Auth::guard('official')->user()->profile_filename }} " />
+                                    <img class="profile-image"  src="{{ str_replace("public","storage", Auth::guard('official')->user()->profile_filename ) }}" /> />
                                 </div>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
