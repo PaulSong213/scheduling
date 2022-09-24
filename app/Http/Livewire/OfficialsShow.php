@@ -5,14 +5,15 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Officials;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Hash;
 class OfficialsShow extends Component
 {
 
     use WithFileUploads;
-    public $first_name,$last_name, $position,$position_level,
-    $department,$civilStatus,
+    public $first_name,$last_name, $position,$position_level = 1,
+    $department,$civilStatus = "Single",
      $birthdate, $cellphone_number, $email,
-     $profile_filename,  $userType,  $address,  $password;
+     $profile_filename,  $userType,  $address,  $password,$confirm_password;
     
 
     protected function rules()
@@ -26,14 +27,12 @@ class OfficialsShow extends Component
             'civilStatus' => '',
             'birthdate' => '',
             'cellphone_number' => '',
-            'email' => '',
+            'email' => 'unique:officials|unique:users',
             'profile_filename' => '',
             'userType' => '',
             'address' => '',
             'password' => '',
-
-           
-
+            'confirm_password' => 'same:password'
         ];
     }
     public function updated($fields)
@@ -50,6 +49,13 @@ class OfficialsShow extends Component
         $validatedData = $this->validate();
         $validatedData['userType']= $a;
         $validatedData['profile_filename']= $t;
+        $validatedData['position_level']= $this->position_level;
+        $validatedData['cellphone_number']= '+639'.$this->cellphone_number;
+        $validatedData['password']=  Hash::make($this->password);
+        $validatedData['civilStatus']=  $this->civilStatus;
+        if(!$validatedData['department']){
+            $validatedData['department']=  "-";
+        }
         Officials::create($validatedData);
         session()->flash('message', 'Officials added successfully');
         $this->resetInput();
@@ -68,6 +74,7 @@ class OfficialsShow extends Component
         $this->profile_filename = "";
         $this->address = "";
         $this->password = "";
+        $this->confirm_password = "";
     }
 
     public function render()
