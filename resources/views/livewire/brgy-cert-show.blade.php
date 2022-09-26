@@ -54,6 +54,6 @@
             </div>
         </div>
     </div>
-    @include('livewire.brgycertModal')
+    @include('livewire.brgycertmodal')
 
 </div>

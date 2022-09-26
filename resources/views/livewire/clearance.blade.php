@@ -55,6 +55,6 @@
             </div>
         </div>
     </div>
-    @include('livewire.clearanceModal')
+    @include('livewire.clearancemodal')
 
 </div>
