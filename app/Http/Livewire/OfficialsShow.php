@@ -5,13 +5,25 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Officials;
 use Livewire\WithFileUploads;
+<<<<<<< HEAD
 use Livewire\WithPagination;
 
+=======
+use Illuminate\Support\Facades\Hash;
+>>>>>>> 0cf07eb8131eee6b48e8e2e317aa4d23c25a4450
 class OfficialsShow extends Component
 {
 
     use WithFileUploads;
+<<<<<<< HEAD
     use WithPagination;
+=======
+    public $first_name,$last_name, $position,$position_level = 1,
+    $department,$civilStatus = "Single",
+     $birthdate, $cellphone_number, $email,
+     $profile_filename,  $userType,  $address,  $password,$confirm_password;
+    
+>>>>>>> 0cf07eb8131eee6b48e8e2e317aa4d23c25a4450
 
     public $first_name, $last_name, $position, $position_level,
         $department, $civilStatus,
@@ -31,14 +43,18 @@ class OfficialsShow extends Component
             'civilStatus' => '',
             'birthdate' => '',
             'cellphone_number' => '',
-            'email' => '',
+            'email' => 'unique:officials|unique:users',
             'profile_filename' => '',
             'userType' => '',
             'address' => '',
             'password' => '',
+<<<<<<< HEAD
 
 
 
+=======
+            'confirm_password' => 'same:password'
+>>>>>>> 0cf07eb8131eee6b48e8e2e317aa4d23c25a4450
         ];
     }
     public function updated($fields)
@@ -53,8 +69,20 @@ class OfficialsShow extends Component
         $a =  "admin";
 
         $validatedData = $this->validate();
+<<<<<<< HEAD
         $validatedData['userType'] = $a;
         $validatedData['profile_filename'] = $t;
+=======
+        $validatedData['userType']= $a;
+        $validatedData['profile_filename']= $t;
+        $validatedData['position_level']= $this->position_level;
+        $validatedData['cellphone_number']= '+639'.$this->cellphone_number;
+        $validatedData['password']=  Hash::make($this->password);
+        $validatedData['civilStatus']=  $this->civilStatus;
+        if(!$validatedData['department']){
+            $validatedData['department']=  "-";
+        }
+>>>>>>> 0cf07eb8131eee6b48e8e2e317aa4d23c25a4450
         Officials::create($validatedData);
         session()->flash('message', 'Official added successfully');
         $this->resetInput();
@@ -106,6 +134,7 @@ class OfficialsShow extends Component
         $this->profile_filename = "";
         $this->address = "";
         $this->password = "";
+        $this->confirm_password = "";
     }
     public function editOfficial(int $official_id)
     {

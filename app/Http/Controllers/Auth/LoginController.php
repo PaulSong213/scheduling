@@ -50,7 +50,6 @@ class LoginController extends Controller
             //log in if official
             $request->session()->regenerate();
             //Auth::guard('official')->login($official);
-            Auth::setUser($official);
             return redirect()->intended('/home');
             die();
         } else if (Auth::guard('web')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], true )) {
@@ -58,7 +57,6 @@ class LoginController extends Controller
             $user = new User($request->all());
             $request->session()->regenerate();
             //Auth::guard('web')->login($user);
-            Auth::setUser($user);
             return redirect()->intended('/request');
             die();
         }

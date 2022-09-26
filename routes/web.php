@@ -69,6 +69,9 @@ Route::get('/request/success',  function() {
 Route::post('/multiLogin',  [App\Http\Controllers\Auth\LoginController::class, 'multiLogin'])->name('multiLogin');
 Route::post('/logoutOfficial',  [App\Http\Controllers\Auth\LogoutController::class, 'logoutOfficial'])->name('logoutOfficial');
 
+
+
+
 //default routes
 Route::resource('user', UserController::class);
 Route::resource('officials', OfficialsController::class);
