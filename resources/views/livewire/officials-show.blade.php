@@ -76,5 +76,5 @@
             </div>
         </div>
     </div>
-    @include('livewire.officialsModal')
+    @include('livewire.officialsmodal')
 </div>

@@ -56,6 +56,6 @@
             </div>
         </div>
     </div>
-    @include('livewire.permitsModal')
+    @include('livewire.permitsmodal')
 
 </div>

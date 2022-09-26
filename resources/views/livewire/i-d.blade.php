@@ -54,6 +54,6 @@
             </div>
         </div>
     </div>
-    @include('livewire.idModal')
+    @include('livewire.idmodal')
 
 </div>
