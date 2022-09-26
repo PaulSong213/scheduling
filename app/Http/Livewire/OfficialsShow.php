@@ -5,30 +5,21 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Officials;
 use Livewire\WithFileUploads;
-<<<<<<< HEAD
 use Livewire\WithPagination;
 
-=======
 use Illuminate\Support\Facades\Hash;
->>>>>>> 0cf07eb8131eee6b48e8e2e317aa4d23c25a4450
 class OfficialsShow extends Component
 {
 
     use WithFileUploads;
-<<<<<<< HEAD
     use WithPagination;
-=======
     public $first_name,$last_name, $position,$position_level = 1,
     $department,$civilStatus = "Single",
      $birthdate, $cellphone_number, $email,
      $profile_filename,  $userType,  $address,  $password,$confirm_password;
     
->>>>>>> 0cf07eb8131eee6b48e8e2e317aa4d23c25a4450
 
-    public $first_name, $last_name, $position, $position_level,
-        $department, $civilStatus,
-        $birthdate, $cellphone_number, $email,
-        $profile_filename,  $userType,  $address,  $password, $official_id;
+    public  $official_id;
 
     protected $paginationTheme = 'bootstrap';
     public $search = '';
@@ -48,13 +39,7 @@ class OfficialsShow extends Component
             'userType' => '',
             'address' => '',
             'password' => '',
-<<<<<<< HEAD
-
-
-
-=======
             'confirm_password' => 'same:password'
->>>>>>> 0cf07eb8131eee6b48e8e2e317aa4d23c25a4450
         ];
     }
     public function updated($fields)
@@ -69,10 +54,8 @@ class OfficialsShow extends Component
         $a =  "admin";
 
         $validatedData = $this->validate();
-<<<<<<< HEAD
         $validatedData['userType'] = $a;
         $validatedData['profile_filename'] = $t;
-=======
         $validatedData['userType']= $a;
         $validatedData['profile_filename']= $t;
         $validatedData['position_level']= $this->position_level;
@@ -82,7 +65,6 @@ class OfficialsShow extends Component
         if(!$validatedData['department']){
             $validatedData['department']=  "-";
         }
->>>>>>> 0cf07eb8131eee6b48e8e2e317aa4d23c25a4450
         Officials::create($validatedData);
         session()->flash('message', 'Official added successfully');
         $this->resetInput();
