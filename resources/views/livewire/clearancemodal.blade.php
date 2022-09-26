@@ -1,16 +1,16 @@
 
 {{-- Set Schedule Modal --}}
-<div wire:ignore.self class="modal fade" id="setScheduleModal" tabindex="-1" aria-labelledby="setScheduleModalLabel"
+<div wire:ignore.self class="modal fade" id="setClearanceScheduleModal" tabindex="-1" aria-labelledby="setClearanceScheduleModalLabel"
     aria-hidden="true">
 
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="setScheduleModalLabel">Permit Request</h5>
+                <h5 class="modal-title" id="setClearanceScheduleModalLabel">Clearance Request</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="schedulePermit">
+                <form wire:submit.prevent="scheduleClearance">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label>Date of Release
@@ -37,17 +37,17 @@
     </div>
 </div>
 {{-- Decline Modal --}}
-<div wire:ignore.self class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModalLabel"
+<div wire:ignore.self class="modal fade" id="declineClearanceModal" tabindex="-1" aria-labelledby="declineClearanceModalLabel"
     aria-hidden="true">
 
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="declineModalLabel">Decline Request</h5>
+                <h5 class="modal-title" id="declineClearanceModalLabel">Decline Request</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="declinePermit">
+                <form wire:submit.prevent="declineClearance">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label>Decline Reason

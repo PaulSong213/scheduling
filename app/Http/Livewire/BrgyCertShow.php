@@ -7,20 +7,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Clearance extends Component
+class BrgyCertShow extends Component
 {
     public $credentials;
     public $currentCredential, $newStatus, $newScheduledDate, $message, $current_cellphone_number;
     public $typeOfPermit, $nameOfResident, $processingFee, $date, $permitID;
     public $status, $scheduled_date, $decline_reason;
 
-    public function editClearance(int $permitID, String $current_cellphone_number)
+    public function editBrgyCert(int $permitID, String $current_cellphone_number)
     {
         $this->currentCredential = Credentials::find($permitID)->toArray();
         $this->current_cellphone_number = $current_cellphone_number;
     }
 
-    public function scheduleClearance()
+    public function scheduleBrgyCert()
     {
         $this->currentCredential['status'] = "scheduled";
         $this->currentCredential['scheduled_date'] = date('Y-m-d H:i:s',  strtotime($this->newScheduledDate));
@@ -39,7 +39,7 @@ class Clearance extends Component
     {
         $this->newScheduledDate = "";
     }
-    public function declineClearance()
+    public function declineBrgyCert()
     {
         $this->currentCredential['status'] = "declined";
         $this->currentCredential['decline_reason'] = $this->message;
@@ -53,15 +53,14 @@ class Clearance extends Component
         $this->dispatchBrowserEvent('close-modal');
         redirect()->route('sendSMS', ['sms' => $this->message, 'number' => "+" . $this->current_cellphone_number, 'redirectRoute' => '/home']);
     }
-
     public function render()
     {
         $this->credentials = DB::table('credentials')
             ->join('users', 'users.id', '=', 'credentials.user_id')
             ->select('users.*', 'credentials.*')
-            ->where('credentials.credential_type', '=', 'Barangay Clearance')
+            ->where('credentials.credential_type', '=', 'Barangay Certificate')
             ->where('credentials.status', '=', 'pending')
             ->get();
-        return view('livewire.clearance');
+        return view('livewire.brgy-cert-show', [$this->credentials]);
     }
 }

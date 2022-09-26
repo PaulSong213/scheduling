@@ -24,6 +24,6 @@ class BrgyCertController extends Controller
      */
     public function index()
     {
-        return view('brgycert.index');
+        return view('brgy-cert.index');
     }
 }

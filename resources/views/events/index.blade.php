@@ -16,6 +16,9 @@
 <script>
     window.addEventListener('close-modal', event =>{
        $('#eventsModal').modal('hide');
+       $('#updateEventsModal').modal('hide');
+       $('#deleteEventsModal').modal('hide');
+
     })
 </script>
 @endsection

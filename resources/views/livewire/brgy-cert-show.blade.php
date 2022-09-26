@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Barangay Clearance
+                        <h4>Barangay Certificates
                         </h4>
 
                     </div>
@@ -31,13 +31,13 @@
                                         <td>{{ $credential->credential_type }}</td>
                                         <td>
                                             <button type="button"
-                                                wire:click="editClearance({{ $credential->id }},{{ $credential->cellphone_number }})"
+                                                wire:click="editBrgyCert({{ $credential->id }},{{ $credential->cellphone_number }})"
                                                 class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#setClearanceScheduleModal">Set Schedule</button>
+                                                data-bs-target="#setCertScheduleModal">Set Schedule</button>
                                             <button type="button"
-                                                wire:click="editClearance({{ $credential->id }},{{ $credential->cellphone_number }})"
+                                                wire:click="editBrgyCert({{ $credential->id }},{{ $credential->cellphone_number }})"
                                                 class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#declineClearanceModal">Decline</button>
+                                                data-bs-target="#declineCertModal">Decline</button>
                                         </td>
 
                                     </tr>
@@ -49,12 +49,11 @@
                                 @endforelse
                             </tbody>
                         </table>
-                     
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @include('livewire.clearanceModal')
+    @include('livewire.brgycertModal')
 
 </div>

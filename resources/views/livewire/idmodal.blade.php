@@ -1,16 +1,16 @@
 
 {{-- Set Schedule Modal --}}
-<div wire:ignore.self class="modal fade" id="setScheduleModal" tabindex="-1" aria-labelledby="setScheduleModalLabel"
+<div wire:ignore.self class="modal fade" id="setIDScheduleModal" tabindex="-1" aria-labelledby="setIDScheduleModalLabel"
     aria-hidden="true">
 
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="setScheduleModalLabel">Permit Request</h5>
+                <h5 class="modal-title" id="setIDScheduleModalLabel">Barangay ID Request</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="schedulePermit">
+                <form wire:submit.prevent="scheduleID">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label>Date of Release
@@ -37,17 +37,17 @@
     </div>
 </div>
 {{-- Decline Modal --}}
-<div wire:ignore.self class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModalLabel"
+<div wire:ignore.self class="modal fade" id="declineIDModal" tabindex="-1" aria-labelledby="declineIDModalLabel"
     aria-hidden="true">
 
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="declineModalLabel">Decline Request</h5>
+                <h5 class="modal-title" id="declineIDModalLabel">Decline Request</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="declinePermit">
+                <form wire:submit.prevent="declineBrgyID">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label>Decline Reason
