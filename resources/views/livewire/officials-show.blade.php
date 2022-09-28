@@ -50,7 +50,7 @@
                                         <td>{{ $official->cellphone_number }}</td>
                                         <td>{{ $official->email }}</td>
                                         <td><img width="40"
-                                                src="{{ str_replace('public', 'storage', $official->profile_filename) }}">
+                                                src="{{ $official->profile_filename }}">
                                         </td>
                                         <td>{{ $official->address }}</td>
                                         <td>

@@ -87,7 +87,7 @@
                         <div class="mb-3 mt-1">
                             <label>ID
                             </label>
-                            <img class="w-100 mt-1" src="/storage/{{ $viewID[0]->proof_id_filename}}">
+                            <img class="w-100 mt-1" src="{{ $viewID[0]->proof_id_filename}}">
                         </div>
                     </div>
             </div>

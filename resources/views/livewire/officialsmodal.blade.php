@@ -107,7 +107,9 @@
                             <label>{{ __('ID Image') }}</label>
 
                             <div class="md-8">
-                                <input id="proof_id_filename" type="file"  wire:model="profile_filename" onchange="document.getElementById('proof_id_filename_preview').src = window.URL.createObjectURL(this.files[0])" class="form-control @error('proof_id_filename_title') is-invalid @enderror" name="proof_id_filename" value="{{ old('proof_id_filename') }}" required autocomplete="proof_id_filename_title">
+                                <input wire:model="profile_filename" class="hidden-input1" autocomplete="off" name="proof_id_filename"
+                                                type="text" id="proof_id_filename" required />
+                                <input id="proof_id_filename_upload" type="file"   onchange="document.getElementById('proof_id_filename_preview').src = window.URL.createObjectURL(this.files[0])" class="form-control @error('proof_id_filename_title') is-invalid @enderror" name="proof_id_filename_upload" value="{{ old('proof_id_filename') }}" required autocomplete="proof_id_filename_title">
                                 <small>Image of your ID that contains the Address of Barangay Manuyo</small>
 
                                 @error('proof_id_filename')
@@ -317,3 +319,10 @@
         </div>
     </div>
 </div>
+<script type="module">
+    import { uploadFirebaseFiles } from "/js/fireStorage.js";
+    $("#proof_id_filename_upload").change(function(){
+        uploadFirebaseFiles('proof_id_filename_upload','proof_id_filename', true);
+    });
+   
+</script>

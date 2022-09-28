@@ -39,11 +39,10 @@ class EventsShow extends Component
     public function saveEvents()
     {
 
-        $t =  $this->event_filename->storePublicly('public');
+        // $t =  $this->event_filename->storePublicly('public');
 
 
         $validatedData = $this->validate();
-        $validatedData['event_filename'] = $t;
         Events::create($validatedData);
         session()->flash('message', 'Event added successfully');
         $this->resetInput();

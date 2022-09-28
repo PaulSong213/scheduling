@@ -50,15 +50,14 @@ class OfficialsShow extends Component
 
     public function saveOfficials()
     {
-        $t =  $this->profile_filename->storePublicly('public');
+        //$t =  $this->profile_filename->storePublicly('public');
 
         $a =  "admin";
-
+        if(!$this->position_level)$this->position_level = 1;
         $validatedData = $this->validate();
         $validatedData['userType'] = $a;
-        $validatedData['profile_filename'] = $t;
+        $validatedData['profile_filename'] = $this->profile_filename;
         $validatedData['userType'] = $a;
-        $validatedData['profile_filename'] = $t;
         $validatedData['position_level'] = $this->position_level;
         $validatedData['cellphone_number'] = '+639' . $this->cellphone_number;
         $validatedData['password'] =  Hash::make($this->password);

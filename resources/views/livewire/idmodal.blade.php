@@ -87,12 +87,12 @@
                         <div class="mb-3 mt-1">
                             <label>ID
                             </label>
-                            <img class="w-100 mt-1" src="/storage/{{ $viewID[0]->proof_id_filename}}">
+                            <img class="w-100 mt-1" src="{{ $viewID[0]->proof_id_filename}}">
                         </div>
                         <div class="mb-3 mt -1">
                             <label>Proof of Payment
                             </label>
-                            <img class="w-100 mt-1" src="/storage/{{ $viewID[0]->payment_proof_filename}}">
+                            <img class="w-100 mt-1" src="{{ $viewID[0]->payment_proof_filename}}">
                         </div>
 
                     </div>

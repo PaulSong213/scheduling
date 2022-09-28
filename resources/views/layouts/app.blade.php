@@ -66,12 +66,22 @@
         }
 
         .hidden-input {
-            opacity: 0; 
-            width: 0; 
-            height: 0; 
-            border: none; 
-            position: absolute; 
+            opacity: 0;
+            width: 0;
+            height: 0;
+            border: none;
+            position: absolute;
             pointer-events: none;
+        }
+
+        .upload-loader {
+            padding: 1rem;
+            position: fixed;
+            display: block;
+            z-index: 99;
+            background-color: rgba(64, 189, 158, 0.8);
+            width: 100vw;
+
         }
     </style>
     <!-- CSS only -->
@@ -83,7 +93,14 @@
 </head>
 
 <body>
+    <div id="upload-loader" class="upload-loader d-none justify-content-center gap-3">
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h5 class="text-center my-auto">Uploading File Please Wait...</h5>
+    </div>
     <div id="app" class="min-vh-100 d-flex flex-column">
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex gap-2" href="{{ url('/') }}">
