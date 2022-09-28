@@ -3,10 +3,23 @@
 //specify the path, title, and icon class (bootstrap icon)
 $pages = [
     'home' => [
-        'title' => 'Dashboard',
+        'title' => 'History',
         'path' => '/home',
         'icon' => 'bi bi-grid-1x2-fill',
     ],
+   
+    'officials' => [
+        'title' => 'Officials',
+        'path' => '/officials',
+        'icon' => 'bi bi-person-square',
+    ],
+    'events' => [
+        'title' => 'Events',
+        'path' => '/events',
+        'icon' => 'bi bi-calendar3',
+    ],
+];
+$pages1 = [
     'clearance' => [
         'title' => 'Barangay Clearance',
         'path' => '/clearance',
@@ -22,20 +35,10 @@ $pages = [
         'path' => '/brgycert',
         'icon' => 'bi bi-blockquote-right',
     ],
-    'officials' => [
-        'title' => 'Officials',
-        'path' => '/officials',
-        'icon' => 'bi bi-person-square',
-    ],
     'permits' => [
         'title' => 'Permits',
         'path' => '/permits',
         'icon' => 'bi bi-file-text',
-    ],
-    'events' => [
-        'title' => 'Events',
-        'path' => '/events',
-        'icon' => 'bi bi-calendar3',
     ],
 ];
 
@@ -64,6 +67,20 @@ $currentPath = '/' . request()->path();
                     </a>
                 </li>
             @endforeach
+            <div class="mt-3" style="color:#FFF, background-color: #FFF, height:5px, width:100%, text-decoration:underline">
+                <h6  style=" text-decoration:underline">Requests that are for Approval</h6>
+            </div>   
+            @foreach ($pages1 as $page)
+            <li class="nav-item w-100 mb-1">
+                <a href="{{ $page['path'] }}" 
+                    class="nav-link px-0 align-middle text-white w-100 px-2  @if ($page['path'] == $currentPath) {{ 'active' }} @endif ">
+                    <i class="fs-4 {{ $page['icon'] }} "></i>
+                    <span class="ms-2 d-none d-sm-inline fw-bold">
+                        {{ $page['title'] }}
+                    </span>
+                </a>
+            </li>
+        @endforeach
         </ul>
     </div>
 </div>

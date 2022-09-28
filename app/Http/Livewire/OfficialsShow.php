@@ -8,16 +8,17 @@ use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 use Illuminate\Support\Facades\Hash;
+
 class OfficialsShow extends Component
 {
 
     use WithFileUploads;
     use WithPagination;
-    public $first_name,$last_name, $position,$position_level = 1,
-    $department,$civilStatus = "Single",
-     $birthdate, $cellphone_number, $email,
-     $profile_filename,  $userType,  $address,  $password,$confirm_password;
-    
+    public $first_name, $last_name, $position, $position_level = 1,
+        $department, $civilStatus = "Single",
+        $birthdate, $cellphone_number, $email,
+        $profile_filename,  $userType,  $address,  $password, $confirm_password;
+
 
     public  $official_id;
 
@@ -56,14 +57,14 @@ class OfficialsShow extends Component
         $validatedData = $this->validate();
         $validatedData['userType'] = $a;
         $validatedData['profile_filename'] = $t;
-        $validatedData['userType']= $a;
-        $validatedData['profile_filename']= $t;
-        $validatedData['position_level']= $this->position_level;
-        $validatedData['cellphone_number']= '+639'.$this->cellphone_number;
-        $validatedData['password']=  Hash::make($this->password);
-        $validatedData['civilStatus']=  $this->civilStatus;
-        if(!$validatedData['department']){
-            $validatedData['department']=  "-";
+        $validatedData['userType'] = $a;
+        $validatedData['profile_filename'] = $t;
+        $validatedData['position_level'] = $this->position_level;
+        $validatedData['cellphone_number'] = '+639' . $this->cellphone_number;
+        $validatedData['password'] =  Hash::make($this->password);
+        $validatedData['civilStatus'] =  $this->civilStatus;
+        if (!$validatedData['department']) {
+            $validatedData['department'] =  "-";
         }
         Officials::create($validatedData);
         session()->flash('message', 'Official added successfully');
@@ -161,7 +162,9 @@ class OfficialsShow extends Component
 
     public function render()
     {
-        $officials = Officials::where('last_name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(5);
-        return view('livewire.officials-show', ['officials'=>$officials]);
+        $officials = Officials::where('first_name', 'like', '%' . $this->search . '%')
+        ->orWhere('last_name', 'like', '%' . $this->search . '%')
+        ->orderBy('id', 'DESC')->paginate(5);
+        return view('livewire.officials-show', ['officials' => $officials]);
     }
 }

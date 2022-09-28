@@ -11,3 +11,14 @@
 </div>
 
 @endsection
+@section('script')
+
+<script>
+    window.addEventListener('close-modal', event =>{
+     
+       $('#setIDScheduleModal').modal('hide');
+       $('#declineIDModal').modal('hide');
+    })
+
+</script>
+@endsection

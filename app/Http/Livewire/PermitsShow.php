@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class PermitsShow extends Component
 {
-    public $permits;
+    public $permits, $viewPermit;
     public $currentPermit, $newStatus, $newScheduledDate, $message, $current_cellphone_number;
     public $typeOfPermit, $nameOfResident, $processingFee, $date, $permitID;
     public $status, $scheduled_date, $decline_reason;
@@ -36,7 +36,14 @@ class PermitsShow extends Component
     {
         $this->currentPermit = Permits::find($permitID)->toArray();
         $this->current_cellphone_number = $current_cellphone_number;
-
+    }
+    public function view(int $permitID)
+    {
+        $this->viewPermit = DB::table('permits')
+        ->join('users', 'users.id', '=', 'permits.user_id')
+        ->select('users.*', 'permits.*')
+        ->where('permits.id', '=', $permitID)
+        ->get();
     }
     public function schedulePermit()
     {
@@ -51,12 +58,12 @@ class PermitsShow extends Component
         session()->flash('message', 'Permit has been scheduled successfully');
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
-        redirect()->route('sendSMS',['sms'=>$this->message,'number'=>"+".$this->current_cellphone_number,'redirectRoute'=> '/permits']);
+        redirect()->route('sendSMS', ['sms' => $this->message, 'number' => "+" . $this->current_cellphone_number, 'redirectRoute' => '/permits']);
     }
+
     public function resetInput()
     {
-        $this->newScheduledDate= "";
-       
+        $this->newScheduledDate = "";
     }
     public function declinePermit()
     {
@@ -70,8 +77,7 @@ class PermitsShow extends Component
         session()->flash('message', 'Permit has been denied.');
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
-        redirect()->route('sendSMS',['sms'=>$this->message,'number'=>"+".$this->current_cellphone_number,'redirectRoute'=> '/permits']);
-
+        redirect()->route('sendSMS', ['sms' => $this->message, 'number' => "+" . $this->current_cellphone_number, 'redirectRoute' => '/home']);
     }
 
     public function render()
