@@ -60,10 +60,12 @@
                                     </label>
 
                                     <div class="col-md-12">
-                                        <input id="payment_proof_filename" type="file"
+                                        <input class="hidden-input" autocomplete="off" name="payment_proof_filename"
+                                                type="text" id="payment_proof_filename" required />
+                                        <input id="payment_proof_filename_upload" type="file"
                                             onchange="document.getElementById('proof_payment_filename_preview').src = window.URL.createObjectURL(this.files[0])"
                                             class="form-control @error('payment_proof_filename') is-invalid @enderror"
-                                            name="payment_proof_filename" value="{{ old('payment_proof_filename') }}"
+                                            name="payment_proof_filename_upload" value="{{ old('payment_proof_filename') }}"
                                             required autocomplete="payment_proof_filename">
 
                                         @error('payment_proof_filename')
@@ -94,4 +96,10 @@
             </div>
         </div>
     </div>
+    <script type="module">
+        import { uploadFirebaseFiles } from "/js/fireStorage.js";
+        $("#payment_proof_filename_upload").change(function(){
+            uploadFirebaseFiles('payment_proof_filename_upload','payment_proof_filename');
+        });
+    </script>
 @endsection

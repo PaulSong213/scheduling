@@ -48,24 +48,24 @@ class RequestController extends Controller
 
     public function addCredential(Request $request)
     {
-        $payment_proof_full = null;
-        if ($request->payment_proof_filename) {
-            $arr_payment_proof_filename = explode(".", $request->payment_proof_filename->getClientOriginalName());
+        // $payment_proof_full = null;
+        // if ($request->payment_proof_filename) {
+        //     $arr_payment_proof_filename = explode(".", $request->payment_proof_filename->getClientOriginalName());
 
-            $payment_proof_filename_ext = $arr_payment_proof_filename[sizeof($arr_payment_proof_filename) - 1];
+        //     $payment_proof_filename_ext = $arr_payment_proof_filename[sizeof($arr_payment_proof_filename) - 1];
 
-            $request['payment_proof_filename_title'] = $this->randText();
+        //     $request['payment_proof_filename_title'] = $this->randText();
 
-            $payment_proof_full = $request['payment_proof_filename_title'] . '.' . $payment_proof_filename_ext;
+        //     $payment_proof_full = $request['payment_proof_filename_title'] . '.' . $payment_proof_filename_ext;
 
-            $request->payment_proof_filename->storeAs('public', $payment_proof_full);
-        }
+        //     $request->payment_proof_filename->storeAs('public', $payment_proof_full);
+        // }
 
         try {
             Credentials::create([
                 'purpose' => $request->input('purpose'),
                 'user_id' => Auth::user()->id,
-                'payment_proof_filename' => $payment_proof_full,
+                'payment_proof_filename' => $request->input('payment_proof_filename'),
                 'status' => "pending",
                 'credential_type' => $request->input('credential_type'),
             ]);
@@ -82,18 +82,18 @@ class RequestController extends Controller
     public function addPermit(Request $request)
     {
 
-        $payment_proof_full = null;
-        if ($request->payment_proof_filename) {
-            $arr_payment_proof_filename = explode(".", $request->payment_proof_filename->getClientOriginalName());
+        // $payment_proof_full = null;
+        // if ($request->payment_proof_filename) {
+        //     $arr_payment_proof_filename = explode(".", $request->payment_proof_filename->getClientOriginalName());
 
-            $payment_proof_filename_ext = $arr_payment_proof_filename[sizeof($arr_payment_proof_filename) - 1];
+        //     $payment_proof_filename_ext = $arr_payment_proof_filename[sizeof($arr_payment_proof_filename) - 1];
 
-            $request['payment_proof_filename_title'] = $this->randText();
+        //     $request['payment_proof_filename_title'] = $this->randText();
 
-            $payment_proof_full = $request['payment_proof_filename_title'] . '.' . $payment_proof_filename_ext;
+        //     $payment_proof_full = $request['payment_proof_filename_title'] . '.' . $payment_proof_filename_ext;
 
-            $request->payment_proof_filename->storeAs('public', $payment_proof_full);
-        }
+        //     $request->payment_proof_filename->storeAs('public', $payment_proof_full);
+        // }
 
         try {
             Permits::create([
@@ -101,7 +101,7 @@ class RequestController extends Controller
                 'business_location' => $request->input('business_location'),
                 'business_type' => $request->input('business_type'),
                 'business_name' => $request->input('business_name'),
-                'payment_proof_filename' => $payment_proof_full,
+                'payment_proof_filename' =>$request->input('payment_proof_filename'),
                 'status' => "pending",
             ]);
             return redirect('/request/success');

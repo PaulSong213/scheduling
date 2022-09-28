@@ -171,15 +171,18 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <label for="profile_filename"
+                                                <label for="profile_filename_upload"
                                                     class="col-md-4 col-form-label text-md-end">{{ __('Profile Image') }}</label>
 
                                                 <div class="col-md-8">
-                                                    <input id="profile_filename" type="file"
-                                                        onchange="document.getElementById('profile-preview').src = window.URL.createObjectURL(this.files[0])"
+                                                    <input class="hidden-input" autocomplete="off"
+                                                        name="profile_filename" type="text" id="profile_filename"
+                                                        required />
+                                                    <input id="profile_filename_upload" type="file"
+                                                        onchange="document.getElementById('profile-preview').src = window.URL.createObjectURL(this.files[0]);"
                                                         class="form-control @error('profile_filename_title') is-invalid @enderror"
-                                                        name="profile_filename" value="{{ old('profile_filename') }}"
-                                                        required autocomplete="profile_filename">
+                                                        value="{{ old('profile_filename') }}" required
+                                                        autocomplete="profile_filename">
 
                                                     @error('profile_filename_title')
                                                         <span class="invalid-feedback" role="alert">
@@ -203,15 +206,17 @@
                                                 </div>
                                             </div>
 
-                                            <label for="proof_id_filename"
+                                            <label for="proof_id_filename_upload"
                                                 class="col-md-4 col-form-label text-md-end">{{ __('ID Image') }}</label>
 
                                             <div class="col-md-8">
-                                                <input id="proof_id_filename" type="file"
+                                                <input class="hidden-input" autocomplete="off" name="proof_id_filename"
+                                                    type="text" id="proof_id_filename" required />
+                                                <input id="proof_id_filename_upload" type="file"
                                                     onchange="document.getElementById('proof_id_filename_preview').src = window.URL.createObjectURL(this.files[0])"
                                                     class="form-control @error('proof_id_filename_title') is-invalid @enderror"
-                                                    name="proof_id_filename" value="{{ old('proof_id_filename') }}"
-                                                    required autocomplete="proof_id_filename_title">
+                                                    value="{{ old('proof_id_filename') }}" required
+                                                    autocomplete="proof_id_filename_title">
                                                 <small>Image of your ID that contains the Address of Barangay Manuyo</small>
 
                                                 @error('proof_id_filename')
@@ -257,7 +262,6 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <button id="test" >test</button>
                                 </div>
                             </div>
                             <div class="col-lg-4 d-flex align-items-center gradient-custom-2">
@@ -276,51 +280,18 @@
             </div>
         </div>
     </section>
+
+    {{-- <script src="/js/fireStorage.js" type="module"></script> --}}
     <script type="module">
+        import { uploadFirebaseFiles } from "/js/fireStorage.js";
         $(document).ready(function() {
             document.getElementById('birthdate').value = "2000-01-01";
         });
-        // Import the functions you need from the SDKs you need
-        import {
-            getStorage,
-            ref,
-            uploadBytes
-        } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.10.0/firebase-storage.min.js";
-        import {
-            initializeApp
-        } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBz12RfkSIRyJOlx5xuKX8Z22frIbYj4kM",
-            authDomain: "manuyodos-b8edc.firebaseapp.com",
-            projectId: "manuyodos-b8edc",
-            storageBucket: "manuyodos-b8edc.appspot.com",
-            messagingSenderId: "1013621856366",
-            appId: "1:1013621856366:web:635d674aba3f4bc503ae7f"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-
-        // Initialize Cloud Storage and get a reference to the service
-        const storage = getStorage(app);
-
-        var profileInput = document.getElementById('profile_filename');
-
-        function uploadFirebaseFiles() {
-            const selectedFile = profileInput.files[0];
-            // Create a storage reference from our storage service
-            const storageRef = ref(storage, 'test.jpg');
-
-            uploadBytes(storageRef, selectedFile).then((snapshot) => {
-                console.log('Uploaded a blob or file!');
-            });
-        }
-        $( "#test" ).click(function() {
-            uploadFirebaseFiles();
+        $("#profile_filename_upload").change(function(){
+            uploadFirebaseFiles('profile_filename_upload','profile_filename');
+        });
+        $("#proof_id_filename_upload").change(function(){
+            uploadFirebaseFiles('proof_id_filename_upload','proof_id_filename');
         });
     </script>
 @endsection

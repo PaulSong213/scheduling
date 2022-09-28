@@ -64,11 +64,21 @@
         .message-error {
             background-color: rgba(224, 99, 99, 0.6);
         }
+
+        .hidden-input {
+            opacity: 0; 
+            width: 0; 
+            height: 0; 
+            border: none; 
+            position: absolute; 
+            pointer-events: none;
+        }
     </style>
     <!-- CSS only -->
 
     @livewireStyles
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
 </head>
 
@@ -98,7 +108,7 @@
                             {{-- User authenticated --}}
                             <li class="nav-item dropdown d-flex" id="navbarDropdown">
                                 <div class="shadow-sm border profile-container my-auto">
-                                    <img class="profile-image" src="/storage/{{ Auth::user()->profile_filename }} " />
+                                    <img class="profile-image" src="{{ Auth::user()->profile_filename }} " />
                                 </div>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -119,11 +129,12 @@
                                 </div>
                             </li>
                         @elseif(Auth::guard('official')->check())
-                           
                             {{-- Official authenticated --}}
                             <li class="nav-item dropdown d-flex" id="navbarDropdown">
                                 <div class="shadow-sm border profile-container my-auto">
-                                    <img class="profile-image"  src="{{ str_replace("public","storage", Auth::guard('official')->user()->profile_filename ) }}" /> />
+                                    <img class="profile-image"
+                                        src="{{ Auth::guard('official')->user()->profile_filename }}" />
+                                    />
                                 </div>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -138,7 +149,8 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form-official" action="{{ route('logoutOfficial') }}" method="POST" class="d-none">
+                                    <form id="logout-form-official" action="{{ route('logoutOfficial') }}"
+                                        method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
