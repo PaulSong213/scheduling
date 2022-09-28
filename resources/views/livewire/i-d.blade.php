@@ -3,6 +3,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if (session()->has('message'))
+                <h5 class="alert alert-success">{{ session('message') }}</h5>
+            @endif
                 <div class="card">
                     <div class="card-header">
                         <h4>Barangay IDs
@@ -43,7 +46,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="11">No Record Found</td>
+                                        <td colspan="5">No Record Found</td>
 
                                     </tr>
                                 @endforelse

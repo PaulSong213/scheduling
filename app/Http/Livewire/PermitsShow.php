@@ -70,7 +70,7 @@ class PermitsShow extends Component
         session()->flash('message', 'Permit has been denied.');
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
-        redirect()->route('sendSMS',['sms'=>$this->message,'number'=>"+".$this->current_cellphone_number,'redirectRoute'=> '/permits']);
+        redirect()->route('sendSMS',['sms'=>$this->message,'number'=>"+".$this->current_cellphone_number,'redirectRoute'=> '/home']);
 
     }
 

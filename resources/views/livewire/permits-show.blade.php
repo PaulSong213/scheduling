@@ -45,7 +45,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="11">No Record Found</td>
+                                        <td colspan="7">No Record Found</td>
 
                                     </tr>
                                 @endforelse

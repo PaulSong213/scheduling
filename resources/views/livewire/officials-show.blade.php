@@ -10,7 +10,7 @@
                     <div class="card-header">
                         <h4>Officials
                             <input type="search" wire:model="search" class="form-control float-end mx-2"
-                                style="width:230px" placeholder="Search Official Here...">
+                                style="width:250px" placeholder="Search Official's Name Here...">
                             <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
                                 wire:click="resetInput" data-bs-target="#officialsModal">
                                 Add Official
@@ -64,7 +64,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="11">No Record Found</td>
+                                        <td colspan="12">No Record Found</td>
 
                                     </tr>
                                 @endforelse
