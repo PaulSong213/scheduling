@@ -68,7 +68,7 @@ $currentPath = '/' . request()->path();
                 </li>
             @endforeach
             <div class="mt-3" style="color:#FFF, background-color: #FFF, height:5px, width:100%, text-decoration:underline">
-                <h6  style=" text-decoration:underline"> REQUESTS</h6>
+                <h6  style=" text-decoration:underline">Requests that are for Approval</h6>
             </div>   
             @foreach ($pages1 as $page)
             <li class="nav-item w-100 mb-1">

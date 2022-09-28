@@ -167,10 +167,7 @@
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<<<<<<< HEAD
-=======
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script> --}}
->>>>>>> cfae9b3aba903ed4368fcede8355f443ae23e3b7
     @yield('script')
     @livewireScripts
 

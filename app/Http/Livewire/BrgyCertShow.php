@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class BrgyCertShow extends Component
 {
-    public $credentials;
+    public $credentials,$viewID;
     public $currentCredential, $newStatus, $newScheduledDate, $message, $current_cellphone_number;
     public $typeOfPermit, $nameOfResident, $processingFee, $date, $permitID;
     public $status, $scheduled_date, $decline_reason;
@@ -18,6 +18,14 @@ class BrgyCertShow extends Component
     {
         $this->currentCredential = Credentials::find($permitID)->toArray();
         $this->current_cellphone_number = $current_cellphone_number;
+    }
+    public function view(int $permitID)
+    {
+        $this->viewID = DB::table('credentials')
+        ->join('users', 'users.id', '=', 'credentials.user_id')
+        ->select('users.*', 'credentials.*')
+        ->where('credentials.id', '=', $permitID)
+        ->get();
     }
 
     public function scheduleBrgyCert()
