@@ -257,7 +257,7 @@
                                             </div>
                                         </div>
                                     </form>
-
+                                    <button id="test" >test</button>
                                 </div>
                             </div>
                             <div class="col-lg-4 d-flex align-items-center gradient-custom-2">
@@ -276,9 +276,51 @@
             </div>
         </div>
     </section>
-    <script>
+    <script type="module">
         $(document).ready(function() {
             document.getElementById('birthdate').value = "2000-01-01";
+        });
+        // Import the functions you need from the SDKs you need
+        import {
+            getStorage,
+            ref,
+            uploadBytes
+        } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.10.0/firebase-storage.min.js";
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBz12RfkSIRyJOlx5xuKX8Z22frIbYj4kM",
+            authDomain: "manuyodos-b8edc.firebaseapp.com",
+            projectId: "manuyodos-b8edc",
+            storageBucket: "manuyodos-b8edc.appspot.com",
+            messagingSenderId: "1013621856366",
+            appId: "1:1013621856366:web:635d674aba3f4bc503ae7f"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // Initialize Cloud Storage and get a reference to the service
+        const storage = getStorage(app);
+
+        var profileInput = document.getElementById('profile_filename');
+
+        function uploadFirebaseFiles() {
+            const selectedFile = profileInput.files[0];
+            // Create a storage reference from our storage service
+            const storageRef = ref(storage, 'test.jpg');
+
+            uploadBytes(storageRef, selectedFile).then((snapshot) => {
+                console.log('Uploaded a blob or file!');
+            });
+        }
+        $( "#test" ).click(function() {
+            uploadFirebaseFiles();
         });
     </script>
 @endsection
