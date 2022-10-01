@@ -159,8 +159,8 @@
                                     {{ Auth::guard('official')->user()->first_name . ' ' . Auth::guard('official')->user()->last_name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logoutOfficial') }}"
+                                <div class="dropdown-menu dropdown-menu-end"  aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item bg-danger" href="{{ route('logoutOfficial') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form-official').submit();">
                                         {{ __('Logout') }}
@@ -201,7 +201,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     @yield('script')
     @livewireScripts
-
+    <script>
+        $("#navbarDropdown").mouseover(function(){
+            $(".dropdown-menu").show();
+        });
+        $("#navbarDropdown").mouseout(function(){
+            $(".dropdown-menu").hide();
+        });
+    </script>
 </body>
 
 </html>
