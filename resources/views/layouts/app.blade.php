@@ -160,7 +160,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end"  aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item bg-danger" href="{{ route('logoutOfficial') }}"
+                                    <a class="dropdown-item" href="{{ route('logoutOfficial') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form-official').submit();">
                                         {{ __('Logout') }}
