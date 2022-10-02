@@ -106,12 +106,11 @@
 
                         </div>
                         <div class="mb-3">
-                            <label>{{ __('Event Image') }}</label>
+                            <input wire:model="event_filename" class="hidden-input" autocomplete="off" name="event_filename"
+                            type="text" id="event_filename" required />
+                            
 
                             <div class="md-8">
-                                <input id="event_filename" type="file" wire:model="event_filename" onchange="document.getElementById('event_filename_preview').src = window.URL.createObjectURL(this.files[0])" class="form-control @error('event_filename_title') is-invalid @enderror" name="event_filename" value="{{ old('event_filename') }}" required autocomplete="event_filename_title">
-                                <small>Image of your ID that contains the Address of Barangay Manuyo</small>
-
                                 @error('event_filename')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

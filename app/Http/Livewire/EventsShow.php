@@ -51,19 +51,17 @@ class EventsShow extends Component
     public function updateEvents()
     {
 
-        $t =  $this->event_filename->storePublicly('public');
+        //$t =  $this->event_filename->storePublicly('public');
 
 
         $validatedData = $this->validate();
-        $validatedData['event_filename'] = $t;
+        //$validatedData['event_filename'] = $t;
 
         Events::where('id', $this->event_id)->update([
             'event_name' => $validatedData['event_name'],
             'date' => $validatedData['date'],
             'purpose' => $validatedData['purpose'],
             'venue' => $validatedData['venue'],
-            'event_filename' => $validatedData['event_filename'],
-
         ]);
         session()->flash('message', 'Update event successfully');
         $this->resetInput();
