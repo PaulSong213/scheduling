@@ -39,8 +39,7 @@
                                         <td>{{ $event->purpose }}</td>
                                         <td>{{ $event->venue }}</td>
                                         <td><img width="40"
-                                                src="{{ str_replace('public', 'storage', $event->event_filename) }}">
-                                        </td>
+                                                src="{{  $event->event_filename }}"></td>
                                         <td>
                                             <button type="button" wire:click="editEvent({{ $event->id }})"
                                                 class="btn btn-primary mt-1 w-100" data-bs-toggle="modal"
@@ -65,5 +64,5 @@
             </div>
         </div>
     </div>
-    @include('livewire.eventsmodal')
+    @include('livewire.eventsmodal') 
 </div>

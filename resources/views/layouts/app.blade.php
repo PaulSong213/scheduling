@@ -64,16 +64,43 @@
         .message-error {
             background-color: rgba(224, 99, 99, 0.6);
         }
+
+        .hidden-input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            border: none;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .upload-loader {
+            padding: 1rem;
+            position: fixed;
+            display: block;
+            z-index: 99;
+            background-color: rgba(64, 189, 158, 0.8);
+            width: 100vw;
+
+        }
     </style>
     <!-- CSS only -->
 
     @livewireStyles
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
 </head>
 
 <body>
+    <div id="upload-loader" class="upload-loader d-none justify-content-center gap-3">
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h5 class="text-center my-auto">Uploading File Please Wait...</h5>
+    </div>
     <div id="app" class="min-vh-100 d-flex flex-column">
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex gap-2" href="{{ url('/') }}">
@@ -98,7 +125,7 @@
                             {{-- User authenticated --}}
                             <li class="nav-item dropdown d-flex" id="navbarDropdown">
                                 <div class="shadow-sm border profile-container my-auto">
-                                    <img class="profile-image" src="/storage/{{ Auth::user()->profile_filename }} " />
+                                    <img class="profile-image" src="{{ Auth::user()->profile_filename }} " />
                                 </div>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -119,11 +146,12 @@
                                 </div>
                             </li>
                         @elseif(Auth::guard('official')->check())
-                           
                             {{-- Official authenticated --}}
                             <li class="nav-item dropdown d-flex" id="navbarDropdown">
                                 <div class="shadow-sm border profile-container my-auto">
-                                    <img class="profile-image"  src="{{ str_replace("public","storage", Auth::guard('official')->user()->profile_filename ) }}" /> />
+                                    <img class="profile-image"
+                                        src="{{ Auth::guard('official')->user()->profile_filename }}" />
+                                    />
                                 </div>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -131,14 +159,15 @@
                                     {{ Auth::guard('official')->user()->first_name . ' ' . Auth::guard('official')->user()->last_name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-end"  aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logoutOfficial') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form-official').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form-official" action="{{ route('logoutOfficial') }}" method="POST" class="d-none">
+                                    <form id="logout-form-official" action="{{ route('logoutOfficial') }}"
+                                        method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -167,10 +196,19 @@
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script> --}}
     @yield('script')
     @livewireScripts
-
+    <script>
+        $("#navbarDropdown").mouseover(function(){
+            $(".dropdown-menu").show();
+        });
+        $("#navbarDropdown").mouseout(function(){
+            $(".dropdown-menu").hide();
+        });
+    </script>
 </body>
 
 </html>

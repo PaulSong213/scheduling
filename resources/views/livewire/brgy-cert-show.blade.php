@@ -28,7 +28,7 @@
                                 @forelse($credentials as $credential)
                                 <tr>
                                     <td>{{ $credential->first_name . ' ' . $credential->last_name }}</td>
-                                    <td><img width="50" src="/storage/{{ $credential->proof_id_filename }}"></td>
+                                    <td><img width="50" src="{{ $credential->proof_id_filename }}"></td>
                                     <td>{{ $credential->purpose }}</td>
                                     <td>{{ $credential->status }}</td>
                                     <td>{{ $credential->credential_type }}</td>
@@ -46,8 +46,8 @@
                                     <td>
 
                                         <button type="button" wire:click="view({{$credential->id }})"
-                                            class="btn btn-success mt-1 w-100" data-bs-toggle="modal" 
-                                            data-bs-target="#viewModal">View ID and Proof of Payment</button>
+                                            class="btn btn-success mt-1 w-70" data-bs-toggle="modal"
+                                            data-bs-target="#viewModal">View ID</button>
                                     </td>
 
 

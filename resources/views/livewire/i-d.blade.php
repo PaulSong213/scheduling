@@ -31,11 +31,11 @@
                                 @forelse($credentials as $credential)
                                     <tr>
                                         <td>{{ $credential->first_name . ' ' . $credential->last_name }}</td>
-                                        <td><img width="50" src="/storage/{{ $credential->proof_id_filename }}"></td>
+                                        <td><img width="50" src="{{ $credential->proof_id_filename }}"></td>
                                         <td>{{ $credential->purpose }}</td>
                                         <td>{{ $credential->status }}</td>
                                         <td>{{ $credential->credential_type }}</td>
-                                        <td><img width="50" src="/storage/{{ $credential->payment_proof_filename }}"></td>
+                                        <td><img width="50" src="{{ $credential->payment_proof_filename }}"></td>
                                         <td>
                                             <button type="button"
                                                 wire:click="editID({{ $credential->id }},{{ $credential->cellphone_number }})"

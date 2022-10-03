@@ -87,9 +87,13 @@
                         <div class="mb-3 mt-1">
                             <label>ID
                             </label>
+<<<<<<< HEAD
                            
                             <img class="w-100 mt-1" src="/storage/{{ $viewID[0]->proof_id_filename}}">
                            
+=======
+                            <img class="w-100 mt-1" src="{{ $viewID[0]->proof_id_filename}}">
+>>>>>>> ad8e8ee3e1494d1fe1fa97e6d4beb7b8cae4ba51
                         </div>
                     </div>
             </div>

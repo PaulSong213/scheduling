@@ -84,10 +84,10 @@
                 @if ($viewPermit)
                     <div class="modal-body">
                         <div class="mb-3">
-                            <img class="w-100" src="/storage/{{ $viewPermit[0]->proof_id_filename}}">
+                            <img class="w-100" src="{{ $viewPermit[0]->proof_id_filename}}">
                         </div>
                         <div class="mb-3">
-                            <img class="w-100" src="/storage/{{ $viewPermit[0]->payment_proof_filename}}">
+                            <img class="w-100" src="{{ $viewPermit[0]->payment_proof_filename}}">
                         </div>
 
                     </div>

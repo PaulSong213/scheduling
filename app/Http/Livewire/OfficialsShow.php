@@ -50,15 +50,14 @@ class OfficialsShow extends Component
 
     public function saveOfficials()
     {
-        $t =  $this->profile_filename->storePublicly('public');
+        //$t =  $this->profile_filename->storePublicly('public');
 
         $a =  "admin";
-
+        if(!$this->position_level)$this->position_level = 1;
         $validatedData = $this->validate();
         $validatedData['userType'] = $a;
-        $validatedData['profile_filename'] = $t;
+        $validatedData['profile_filename'] = $this->profile_filename;
         $validatedData['userType'] = $a;
-        $validatedData['profile_filename'] = $t;
         $validatedData['position_level'] = $this->position_level;
         $validatedData['cellphone_number'] = '+639' . $this->cellphone_number;
         $validatedData['password'] =  Hash::make($this->password);
@@ -74,12 +73,11 @@ class OfficialsShow extends Component
     public function updateOfficial()
     {
 
-        $q =  $this->profile_filename->storePublicly('public');
+        //$q =  $this->profile_filename->storePublicly('public');
         $b =  "admin";
 
         $validatedData = $this->validate();
         $validatedData['userType'] = $b;
-        $validatedData['profile_filename'] = $q;
 
         Officials::where('id', $this->official_id)->update([
             'first_name' => $validatedData['first_name'],
@@ -94,8 +92,6 @@ class OfficialsShow extends Component
             'profile_filename' => $validatedData['profile_filename'],
             'userType' => $validatedData['userType'],
             'address' => $validatedData['address'],
-            'password' => $validatedData['password'],
-
         ]);
         session()->flash('message', 'Updated Official successfully');
         $this->resetInput();
@@ -126,6 +122,7 @@ class OfficialsShow extends Component
             $this->official_id = $official->id;
             $this->first_name = $official->first_name;
             $this->last_name =  $official->last_name;
+            $this->email =  $official->email;
             $this->position =  $official->position;
             $this->position_level =  $official->position_level;
             $this->department =  $official->department;

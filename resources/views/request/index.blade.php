@@ -26,6 +26,7 @@ $services = [
 @extends('layouts.app')
 
 @section('content')
+    
     <div class="container-fluid">
         <div class="row flex-nowrap h-100">
             @include('layouts.sidebarResident')
@@ -36,6 +37,9 @@ $services = [
                             <div class="container">
                                 <div class="row">
                                     <h3 class="mb-4 fw-bold text-start">Request Status</h3>
+                                    @if(sizeof($credentials) + sizeof($permits) <= 0 )
+                                        <h5 class="text-secondary">You did not create a Request yet. Request below the Service you need.</h5>
+                                    @else
                                     <div class="text-start">
                                         <table id="example" class="table table-striped" style="width:100%">
                                             <thead>
@@ -118,6 +122,7 @@ $services = [
                                             <tbody>
                                         </table>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </section>

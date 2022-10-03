@@ -40,39 +40,39 @@ class UserController extends Controller
             die();
         }
 
-        $arr_proof_id = explode(".", $request->proof_id_filename->getClientOriginalName());
-        $arr_profile =  explode(".", $request->profile_filename->getClientOriginalName());
+        // $arr_proof_id = explode(".", $request->proof_id_filename->getClientOriginalName());
+        // $arr_profile =  explode(".", $request->profile_filename->getClientOriginalName());
 
-        $proof_id_filename_ext = $arr_proof_id[1];
-        $profile_filename_ext = $arr_profile[1];
+        // $proof_id_filename_ext = $arr_proof_id[1];
+        // $profile_filename_ext = $arr_profile[1];
 
-        $request['proof_id_filename_title'] = $this->randText();
-        $request['profile_filename_title'] = $this->randText();
+        // $request['proof_id_filename_title'] = $this->randText();
+        // $request['profile_filename_title'] = $this->randText();
 
-        $proof_id_full = $request['proof_id_filename_title'] . '.' . $proof_id_filename_ext;
-        $profile_full = $request['profile_filename_title'] . '.' . $profile_filename_ext;
+        // $proof_id_full = $request['proof_id_filename_title'] . '.' . $proof_id_filename_ext;
+        // $profile_full = $request['profile_filename_title'] . '.' . $profile_filename_ext;
 
 
-        //files should not have dot characters
-        if (sizeof(explode(".", $request->proof_id_filename->getClientOriginalName())) > 2) {
-            return back()
-                ->with('error', 'Image ID should not have "." (dot) character.')
-                ->withInput();
-        }
+        // //files should not have dot characters
+        // if (sizeof(explode(".", $request->proof_id_filename->getClientOriginalName())) > 2) {
+        //     return back()
+        //         ->with('error', 'Image ID should not have "." (dot) character.')
+        //         ->withInput();
+        // }
 
-        if (sizeof(explode(".", $request->profile_filename->getClientOriginalName())) > 2) {
-            return back()
-                ->with('error', 'Image profile should not have "." character.')
-                ->withInput();
-        }
+        // if (sizeof(explode(".", $request->profile_filename->getClientOriginalName())) > 2) {
+        //     return back()
+        //         ->with('error', 'Image profile should not have "." character.')
+        //         ->withInput();
+        // }
 
         $validated = $request->validate([
             'email' => 'required|unique:users|unique:officials',
             'password' => 'required|confirmed|min:6',
         ]);
 
-        $request->proof_id_filename->storeAs('public', $proof_id_full);
-        $request->profile_filename->storeAs('public', $profile_full);
+        // $request->proof_id_filename->storeAs('public', $proof_id_full);
+        // $request->profile_filename->storeAs('public', $profile_full);
 
         $complete_phone_number = "+63" . $request->input('cellphone_number');
 
@@ -84,8 +84,8 @@ class UserController extends Controller
             'birthdate' => $request->input('birthdate'),
             'address' => $request->input('address'),
             'password' => Hash::make($request->input('password')),
-            'proof_id_filename' => $proof_id_full,
-            'profile_filename' => $profile_full,
+            'proof_id_filename' => $request->input('proof_id_filename'),
+            'profile_filename' =>  $request->input('profile_filename'),
         ]);
 
         //log in if official

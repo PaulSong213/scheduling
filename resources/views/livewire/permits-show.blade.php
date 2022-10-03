@@ -29,11 +29,11 @@
                                 @forelse($permits as $permit)
                                     <tr>
                                         <td>{{ $permit->first_name . ' ' . $permit->last_name }}</td>
-                                        <td><img width="50" src="/storage/{{ $permit->proof_id_filename }}"></td>
+                                        <td><img width="50" src="{{ $permit->proof_id_filename }}"></td>
                                         <td>{{ $permit->business_name }}</td>
                                         <td>{{ $permit->business_type }}</td>
                                         <td>{{ $permit->business_location }}</td>
-                                        <td><img width="50" src="/storage/{{ $permit->payment_proof_filename }}"></td>
+                                        <td><img width="50" src="{{ $permit->payment_proof_filename }}"></td>
                                         <td>{{ $permit->status }}</td>
                                         <td>
                                             <button type="button"

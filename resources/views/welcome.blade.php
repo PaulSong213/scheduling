@@ -101,7 +101,7 @@
                                                 <div class="event-image-container ">
                                                     
                                                     <img class="event-image"
-                                                        src="{{ str_replace("public","storage",$event->event_filename) }}">
+                                                        src="{{ $event->event_filename }}">
                                                 </div>
                                                 <h3 class="text-decoration-none"> {{ $event->event_name }} </h3>
                                                 <div>
@@ -127,7 +127,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <img style="width: 100%"
-                                                    src="{{ str_replace("public","storage",$event->event_filename) }}">
+                                                    src="{{ $event->event_filename }}">
                                                     <div>
                                                         <span class="badge text-bg-success my-3">Venue: {{ $event->venue }}
                                                         </span>
