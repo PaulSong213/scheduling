@@ -39,13 +39,14 @@
                                         <td>{{ $event->purpose }}</td>
                                         <td>{{ $event->venue }}</td>
                                         <td><img width="40"
-                                                src="{{ str_replace('public', 'storage', $event->event_filename) }}"></td>
+                                                src="{{ str_replace('public', 'storage', $event->event_filename) }}">
+                                        </td>
                                         <td>
                                             <button type="button" wire:click="editEvent({{ $event->id }})"
-                                                class="btn btn-primary" data-bs-toggle="modal"
+                                                class="btn btn-primary mt-1 w-100" data-bs-toggle="modal"
                                                 data-bs-target="#updateEventsModal">Edit</button>
                                             <button type="button" wire:click="deleteEvent({{ $event->id }})"
-                                                class="btn btn-danger" data-bs-toggle="modal"
+                                                class="btn btn-danger mt-1 w-100" data-bs-toggle="modal"
                                                 data-bs-target="#deleteEventsModal">Delete</button>
                                         </td>
 

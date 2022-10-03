@@ -47,6 +47,10 @@ class BrgyCertShow extends Component
     {
         $this->newScheduledDate = "";
     }
+    public function resetModal()
+    {
+        $this->viewID = null;
+    }
     public function declineBrgyCert()
     {
         $this->currentCredential['status'] = "declined";

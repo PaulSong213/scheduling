@@ -47,6 +47,10 @@ class ID extends Component
     {
         $this->newScheduledDate = "";
     }
+    public function resetModal()
+    {
+        $this->viewID = null;
+    }
     public function declineBrgyID()
     {
         $this->currentCredential['status'] = "declined";

@@ -46,6 +46,10 @@ class Clearance extends Component
     {
         $this->newScheduledDate = "";
     }
+    public function resetModal()
+    {
+        $this->viewID = null;
+    }
     public function declineClearance()
     {
         $this->currentCredential['status'] = "declined";

@@ -55,10 +55,10 @@
                                         <td>{{ $official->address }}</td>
                                         <td>
                                             <button type="button" wire:click="editOfficial({{ $official->id }})"
-                                                class="btn btn-primary" data-bs-toggle="modal"
+                                                class="btn btn-primary mt-1 w-100" data-bs-toggle="modal"
                                                 data-bs-target="#updateOfficialsModal">Edit</button>
                                             <button type="button" wire:click="deleteOfficial({{ $official->id }})"
-                                                class="btn btn-danger" data-bs-toggle="modal"
+                                                class="btn btn-danger mt-1 w-100"data-bs-toggle="modal"
                                                 data-bs-target="#deleteOfficialsModal">Delete</button>
                                         </td>
                                     </tr>

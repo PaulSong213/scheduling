@@ -65,6 +65,10 @@ class PermitsShow extends Component
     {
         $this->newScheduledDate = "";
     }
+    public function resetModal()
+    {
+        $this->viewPermit = null;
+    }
     public function declinePermit()
     {
         $this->currentPermit['status'] = "declined";

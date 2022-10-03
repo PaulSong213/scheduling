@@ -34,19 +34,19 @@
                                     <td>{{ $credential->credential_type }}</td>
                                     <td>
                                         <button type="button"
-                                            wire:click="editID({{ $credential->id }},{{ $credential->cellphone_number }})"
-                                            class="btn btn-primary mt-1 w-50" data-bs-toggle="modal"
-                                            data-bs-target="#setIDScheduleModal">Set Schedule</button>
+                                            wire:click="editBrgyCert({{ $credential->id }},{{ $credential->cellphone_number }})"
+                                            class="btn btn-primary mt-1 w-100" data-bs-toggle="modal"
+                                            data-bs-target="#setCertScheduleModal">Set Schedule</button>
                                         <button type="button"
-                                            wire:click="editID({{ $credential->id }},{{ $credential->cellphone_number }})"
-                                            class="btn btn-danger mt-1 w-50" data-bs-toggle="modal"
-                                            data-bs-target="#declineIDModal">Decline</button>
+                                            wire:click="editBrgyCert({{ $credential->id }},{{ $credential->cellphone_number }})"
+                                            class="btn btn-danger mt-1 w-100" data-bs-toggle="modal"
+                                            data-bs-target="#declineCertModal">Decline</button>
                                     </td>
                                  
                                     <td>
 
                                         <button type="button" wire:click="view({{$credential->id }})"
-                                            class="btn btn-success mt-1 w-70" data-bs-toggle="modal"
+                                            class="btn btn-success mt-1 w-100" data-bs-toggle="modal" 
                                             data-bs-target="#viewModal">View ID and Proof of Payment</button>
                                     </td>
 

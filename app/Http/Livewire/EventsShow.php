@@ -23,7 +23,7 @@ class EventsShow extends Component
         return [
             'event_name' => '',
             'venue' => '',
-            'purpose' => '',
+            'purpose' => 'max:200',
             'date' => '',
             'event_filename' => '',
 

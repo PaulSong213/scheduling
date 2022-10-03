@@ -27,6 +27,7 @@
                             @endphp
                             <tbody>
                                 @forelse ($credentials as $credential)
+                                @if($credential->status != 'pending')
                                     <tr>
                                         <td style="max-width: 150px; background-color: rgb(242, 247, 244)">
                                             <div>
@@ -66,6 +67,8 @@
                                                 : $credential->decline_reason }}
                                         </td>
                                     </tr>
+                                
+                                @endif
                                     @empty
                                     <tr>
                                         <td colspan="6">No Record Found</td>
@@ -73,6 +76,8 @@
                                     </tr>
                                     @endforelse
                                 @forelse($permits as $permit)
+                                @if ($permit->status != 'pending')
+                                    
                                     <tr>
                                         <td style="max-width: 150px; background-color: rgb(242, 247, 244)">
                                             <div>
@@ -112,6 +117,7 @@
                                             {{ $permit->status == 'scheduled' ? $permit->first_name . ' ' . $permit->last_name . ' should be in the barangay office on ' . $permit->scheduled_date . ' for the permit.' : $permit->decline_reason }}
                                         </td>
                                     </tr>
+                                    @endif
                                     @empty
                                     <tr>
                                     
