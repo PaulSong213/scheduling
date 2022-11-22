@@ -44,13 +44,13 @@
                                         </div>
                                     @endif
 
-                                    <form role="form" action="{{ route('residentRegisterCreate') }}" method="POST"
+                                    <form id="signupForm" role="form" action="{{ route('residentRegisterCreate') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
 
                                         <div class="row mb-3">
                                             <label for="first_name"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
+                                                class="col-md-4 col-form-label text-md-end">{{ __('First Name *') }}</label>
 
                                             <div class="col-md-8">
                                                 <input id="first_name" type="text"
@@ -68,7 +68,7 @@
 
                                         <div class="row mb-3">
                                             <label for="last_name"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
+                                                class="col-md-4 col-form-label text-md-end">{{ __('Last Name *') }}</label>
 
                                             <div class="col-md-8">
                                                 <input id="last_name" type="text"
@@ -86,7 +86,7 @@
 
                                         <div class="row mb-3">
                                             <label for="email"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                                class="col-md-4 col-form-label text-md-end">{{ __('Email Address *') }}</label>
 
                                             <div class="col-md-8">
                                                 <input id="email" type="email"
@@ -103,13 +103,35 @@
 
                                         <div class="row mb-3">
                                             <label for="address"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
+                                                class="col-md-4 col-form-label text-md-end">{{ __('Address *') }}</label>
 
                                             <div class="col-md-8">
-                                                <input id="address" type="text"
+                                                <input id="address" type="hidden"
                                                     class="form-control @error('address') is-invalid @enderror"
                                                     name="address" value="{{ old('address') }}" required
                                                     autocomplete="address">
+                                                <div class="d-flex flex-column">
+                                                    <div>
+                                                        <label  style="font-size: 12px" for="street">Street *</label>
+                                                        <input id="street" type="text"
+                                                        class="form-control"
+                                                        name="street"  required
+                                                        >
+                                                    </div>
+                                                    <div>
+                                                        <label 
+                                                        style="font-size: 12px"
+                                                        for="apartment">Apartment, suite, etc.</label>
+                                                        <input id="apartment" type="text"
+                                                        class="form-control"
+                                                        name="apartment"  
+                                                        >
+                                                    </div>
+                                                    <div class="d-flex flex-column align-end">
+                                                        <p class="mt-auto fw-bold mt-1">Brgy. Manuyo Dos
+                                                            , Las Piñas city                                                    </p>
+                                                    </div>
+                                                </div>
 
                                                 @error('address')
                                                     <span class="invalid-feedback" role="alert">
@@ -121,7 +143,7 @@
 
                                         <div class="row mb-3">
                                             <label for="birthdate"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Birth date') }}</label>
+                                                class="col-md-4 col-form-label text-md-end">{{ __('Birth date *') }}</label>
 
                                             <div class="col-md-8">
                                                 <input id="birthdate" type="date"
@@ -139,7 +161,7 @@
 
                                         <div class="row mb-3">
                                             <label for="phone_number"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
+                                                class="col-md-4 col-form-label text-md-end">{{ __('Phone Number *') }}</label>
 
                                             <div class="col-md-8">
                                                 <div class="input-group mb-3">
@@ -172,7 +194,7 @@
                                             </div>
                                             <div class="row">
                                                 <label for="profile_filename_upload"
-                                                    class="col-md-4 col-form-label text-md-end">{{ __('Profile Image') }}</label>
+                                                    class="col-md-4 col-form-label text-md-end">{{ __('Profile Image  *') }}</label>
 
                                                 <div class="col-md-8">
                                                     <input class="hidden-input" autocomplete="off"
@@ -207,7 +229,7 @@
                                             </div>
 
                                             <label for="proof_id_filename_upload"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('ID Image') }}</label>
+                                                class="col-md-4 col-form-label text-md-end">{{ __('ID Image *') }}</label>
 
                                             <div class="col-md-8">
                                                 <input class="hidden-input" autocomplete="off" name="proof_id_filename"
@@ -229,7 +251,7 @@
 
                                         <div class="row mb-3">
                                             <label for="password"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                                class="col-md-4 col-form-label text-md-end">{{ __('Password  *') }}</label>
 
                                             <div class="col-md-8">
                                                 <input id="password" type="password"
@@ -246,7 +268,7 @@
 
                                         <div class="row mb-3">
                                             <label for="password-confirm"
-                                                class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                                                class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password *') }}</label>
 
                                             <div class="col-md-8">
                                                 <input id="password-confirm" type="password" class="form-control"
@@ -286,6 +308,14 @@
         import { uploadFirebaseFiles } from "/js/fireStorage.js";
         $(document).ready(function() {
             document.getElementById('birthdate').value = "2000-01-01";
+            $('#signupForm').submit(function() {
+                var fullAddress = $('#street').val() + " Street, " + $('#apartment').val() + ", Brgy.Manuyo Dos,  Las Piñas city"
+                $('#address').val(fullAddress);
+            });
+            $('#signupForm').click(function() {
+                var fullAddress = $('#street').val() + " Street, " + $('#apartment').val() + ", Brgy.Manuyo Dos,  Las Piñas city"
+                $('#address').val(fullAddress);
+            });
         });
         $("#profile_filename_upload").change(function(){
             uploadFirebaseFiles('profile_filename_upload','profile_filename');
@@ -293,5 +323,6 @@
         $("#proof_id_filename_upload").change(function(){
             uploadFirebaseFiles('proof_id_filename_upload','proof_id_filename');
         });
+
     </script>
 @endsection

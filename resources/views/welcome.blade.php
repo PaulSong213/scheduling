@@ -85,9 +85,19 @@
                             </div>
                         </div>
                     </section>
-
+                     <!-- Call to Action-->
+                     <section class="call-to-action text-white text-center" id="signup">
+                        <div class="container position-relative">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-6">
+                                    <h2 class="mb-4">Ready to Avail Our Public Services? Sign Up Now!</h2>
+                                    <a href="/residentRegister" class="btn btn-primary fs-6 px-5 fw-bold">Sign Up</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     {{-- Events --}}
-                    <section class="features-icons bg-light text-center pt-1">
+                    <section class="features-icons bg-light text-center pt-5">
                         <div class="container">
                             <div class="row">
                                 <h1 class="mb-5">Barangay Events</h1>
@@ -182,17 +192,7 @@
                             </div>
                         </div>
                     </section>
-                    <!-- Call to Action-->
-                    <section class="call-to-action text-white text-center" id="signup">
-                        <div class="container position-relative">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-6">
-                                    <h2 class="mb-4">Ready to Avail Our Public Services? Sign Up Now!</h2>
-                                    <a href="/residentRegister" class="btn btn-primary fs-6 px-5 fw-bold">Sign Up</a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                   
                 </div>
             </div>
         </div>
