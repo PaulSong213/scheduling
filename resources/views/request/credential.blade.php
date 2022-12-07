@@ -21,8 +21,8 @@
                     @endif
                     <div class="col-12 bg-white p-4 shadow-sm rounded row">
                         <h3 class="fw-bold">Request a Barangay Clearance</h3>
-                        <form role="form" class="col-6 my-3" action="{{ route('addCredential') }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form role="form" class="col-12 col-md-6 my-3" action="{{ route('addCredential') }}"
+                            method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">
@@ -85,6 +85,13 @@
                             <input type="hidden" name="credential_type" value="Barangay {{ $type }}" />
                             <button type="submit" class="btn btn-primary px-4 fs-5">Submit Request</button>
                         </form>
+                        <div class="p-3 col-12 col-md-6">
+                            @if ($type == 'ID')
+                                <img class="d-block w-full mx-auto" style="width: 80%" src="/images/sample-id.jpg" />
+                            @else
+                                <img class="d-block w-full mx-auto" style="width: 80%" src="/images/sample-cert.jpg" />
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

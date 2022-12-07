@@ -49,8 +49,7 @@
                                         <td>{{ $official->birthdate }}</td>
                                         <td>{{ $official->cellphone_number }}</td>
                                         <td>{{ $official->email }}</td>
-                                        <td><img width="40"
-                                                src="{{ $official->profile_filename }}">
+                                        <td><img width="40" src="{{ $official->profile_filename }}">
                                         </td>
                                         <td>{{ $official->address }}</td>
                                         <td>

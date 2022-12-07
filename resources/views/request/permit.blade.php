@@ -21,8 +21,8 @@
                     @endif
                     <div class="col-12 bg-white p-4 shadow-sm rounded row">
                         <h3 class="fw-bold">Request a Business Permit</h3>
-                        <form role="form" class="col-6 my-3" action="{{ route('addPermit') }}"
-                            method="POST" enctype="multipart/form-data">
+                        <form role="form" class="col-12 col-md-6 my-3" action="{{ route('addPermit') }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">
@@ -38,7 +38,8 @@
 
                             <div class="mb-3">
                                 <label for="business_location" class="form-label">Business Location</label>
-                                <input type="text" name="business_location" required class="form-control" id="business_location">
+                                <input type="text" name="business_location" required class="form-control"
+                                    id="business_location">
                                 <small> Address of your business </small>
                             </div>
 
@@ -55,13 +56,14 @@
                                 <div class="row">
                                     <label for="proof_payment_filename"
                                         class="col-md-12 col-form-label">{{ __('Proof of Payment Screenshot (GCash)') }}
-                                        <span class="text-primary fw-bold">Send your  ₱200 payment to GCash # 0987654321 Eduardo R.
+                                        <span class="text-primary fw-bold">Send your ₱200 payment to GCash # 0987654321
+                                            Eduardo R.
                                             Timbungco </span>
                                     </label>
 
                                     <div class="col-md-12">
                                         <input class="hidden-input" autocomplete="off" name="payment_proof_filename"
-                                                type="text" id="payment_proof_filename" required />
+                                            type="text" id="payment_proof_filename" required />
                                         <input id="payment_proof_filename_upload" type="file"
                                             onchange="document.getElementById('proof_payment_filename_preview').src = window.URL.createObjectURL(this.files[0])"
                                             class="form-control @error('payment_proof_filename') is-invalid @enderror"
@@ -91,6 +93,10 @@
                             </section>
                             <button type="submit" class="btn btn-primary px-4 fs-5">Submit Request</button>
                         </form>
+                        <div class=" p-3 col-12 col-md-6">
+                            <img class="d-block w-full mx-auto" style="width: 70%; height: auto"
+                                src="/images/sample-business.jpg" />
+                        </div>
                     </div>
                 </div>
             </div>

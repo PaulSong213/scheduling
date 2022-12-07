@@ -80,7 +80,7 @@
                         <div class="mb-3">
                             <label>Birthdate
                             </label>
-                            <input type="date" wire:model="birthdate" class="form-control">
+                            <input type="date" required wire:model="birthdate" class="form-control" id="birthdate">
                             @error('birthdate')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -275,7 +275,7 @@
                         <div class="mb-3">
                             <label>Birthdate
                             </label>
-                            <input type="date" wire:model="birthdate" class="form-control">
+                            <input type="date" required wire:model="birthdate" class="form-control birthdate">
                             @error('birthdate')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
