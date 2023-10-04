@@ -25,9 +25,9 @@ Route::get('/', function () {
         ->get();
     $events = DB::table('events')
         ->select()
-        ->orderBy('date')
+        ->orderBy('id', 'asc')
         ->get();
-    
+
     return view('welcome')
         ->with('officials', $officials)
         ->with('events', $events);
@@ -51,8 +51,8 @@ Route::get('/clearance', [App\Http\Controllers\ClearanceController::class, 'inde
 Route::get('/id', [App\Http\Controllers\IDController::class, 'index'])->name('id');
 
 Route::get('/twilio/sendSMS/{sms}/{number}/{redirectRoute}', [App\Http\Controllers\TwilioController::class, 'sendSMS'])
-->name('sendSMS')
-->where('redirectRoute', '(.*)');;
+    ->name('sendSMS')
+    ->where('redirectRoute', '(.*)');;
 
 
 //requests
@@ -61,7 +61,7 @@ Route::get('/request/permit', [App\Http\Controllers\RequestController::class, 'p
 Route::post('/request/addCredential',  [App\Http\Controllers\RequestController::class, 'addCredential'])->name('addCredential');
 Route::post('/request/addPermit',  [App\Http\Controllers\RequestController::class, 'addPermit'])->name('addPermit');
 
-Route::get('/request/success',  function() {
+Route::get('/request/success',  function () {
     return view('request.success');
 });
 
@@ -76,4 +76,3 @@ Route::post('/logoutOfficial',  [App\Http\Controllers\Auth\LogoutController::cla
 Route::resource('user', UserController::class);
 Route::resource('officials', OfficialsController::class);
 Route::resource('request', RequestController::class);
-
