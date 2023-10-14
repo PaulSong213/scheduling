@@ -27,7 +27,7 @@ Route::get('/', function () {
         ->get();
     $events = DB::table('events')
         ->select()
-        ->orderBy('date')
+        ->orderBy('id', 'asc')
         ->get();
 
     return view('welcome')

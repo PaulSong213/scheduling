@@ -77,7 +77,7 @@ $services = [
                                                     <td> {{ isset($credential->scheduled_date) ? date('M d, Y - D', strtotime($credential->scheduled_date)) : '' }}
                                                     </td>
                                                     <td style="max-width: 200px">
-                                                        {{ $credential->status == 'scheduled' ? 'You can get your requested document on assigned scheduled date at Barangay Hall of Ligas 1' : $credential->decline_reason }}
+                                                        {{ $credential->status == 'scheduled' ? 'You can get your requested document on assigned scheduled date at Barangay Hall of Ligas1' : $credential->decline_reason }}
                                                     </td>
                                                 </tr>
                                                 @endforeach

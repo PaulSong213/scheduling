@@ -20,7 +20,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Ligas 1</title>
+    <title>Barangay Ligas 1</title>
     <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

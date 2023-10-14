@@ -13,7 +13,6 @@ class TwilioController extends Controller
     public function sendSMS($sms, $number, $redirectRoute = "home")
     {
         return redirect()->route('home'); //TODO : Remove this line when twilio is working again
-
         $twilio = new Client(\config('twilio.TWILIO_ACCOUNT_SID'), \config('twilio.TWILIO_AUTH_TOKEN'));
         try {
             $message = $twilio->messages
