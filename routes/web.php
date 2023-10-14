@@ -69,8 +69,8 @@ Route::get('/request/success',  function () {
 });
 
 //constum auth
-Route::post('/multiLogin',  [App\Http\Controllers\Auth\LoginController::class, 'multiLogin'])->name('multiLogin');
-Route::post('/logoutOfficial',  [App\Http\Controllers\Auth\LogoutController::class, 'logoutOfficial'])->name('logoutOfficial');
+Route::post('/multiLogin',  [\App\Http\Controllers\Auth\LoginController::class, 'multiLogin'])->name('multiLogin');
+Route::post('/logoutOfficial',  [\App\Http\Controllers\Auth\LogoutController::class, 'logoutOfficial'])->name('logoutOfficial');
 
 
 
@@ -79,5 +79,3 @@ Route::post('/logoutOfficial',  [App\Http\Controllers\Auth\LogoutController::cla
 Route::resource('user', UserController::class);
 Route::resource('officials', OfficialsController::class);
 Route::resource('request', RequestController::class);
-
-URL::forceScheme('https');
