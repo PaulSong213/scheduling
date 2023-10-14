@@ -42,27 +42,27 @@ Auth::routes();
 
 
 //costum pages
-Route::get('/residentRegister',  [App\Http\Controllers\UserController::class, 'residentRegister'])->name('residentRegister');
-Route::post('/residentRegisterCreate',  [App\Http\Controllers\UserController::class, 'residentRegisterCreate'])->name('residentRegisterCreate');
+Route::get('/residentRegister',  [\App\Http\Controllers\UserController::class, 'residentRegister'])->name('residentRegister');
+Route::post('/residentRegisterCreate',  [\App\Http\Controllers\UserController::class, 'residentRegisterCreate'])->name('residentRegisterCreate');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/officials', [App\Http\Controllers\OfficialsController::class, 'index'])->name('officials');
-Route::get('/permits', [App\Http\Controllers\PermitsController::class, 'index'])->name('permits');
-Route::get('/events', [App\Http\Controllers\EventsController::class, 'index'])->name('events');
-Route::get('/brgycert', [App\Http\Controllers\BrgyCertController::class, 'index'])->name('brgycert');
-Route::get('/clearance', [App\Http\Controllers\ClearanceController::class, 'index'])->name('clearance');
-Route::get('/id', [App\Http\Controllers\IDController::class, 'index'])->name('id');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/officials', [\App\Http\Controllers\OfficialsController::class, 'index'])->name('officials');
+Route::get('/permits', [\App\Http\Controllers\PermitsController::class, 'index'])->name('permits');
+Route::get('/events', [\App\Http\Controllers\EventsController::class, 'index'])->name('events');
+Route::get('/brgycert', [\App\Http\Controllers\BrgyCertController::class, 'index'])->name('brgycert');
+Route::get('/clearance', [\App\Http\Controllers\ClearanceController::class, 'index'])->name('clearance');
+Route::get('/id', [\App\Http\Controllers\IDController::class, 'index'])->name('id');
 
-Route::get('/twilio/sendSMS/{sms}/{number}/{redirectRoute}', [App\Http\Controllers\TwilioController::class, 'sendSMS'])
+Route::get('/twilio/sendSMS/{sms}/{number}/{redirectRoute}', [\App\Http\Controllers\TwilioController::class, 'sendSMS'])
     ->name('sendSMS')
     ->where('redirectRoute', '(.*)');;
 
 
 //requests
-Route::get('/request/credential/{type}', [App\Http\Controllers\RequestController::class, 'credential'])->name('credential')->whereIn('type', ['Clearance', 'ID', 'Certificate']);;
-Route::get('/request/permit', [App\Http\Controllers\RequestController::class, 'permit'])->name('permit');
-Route::post('/request/addCredential',  [App\Http\Controllers\RequestController::class, 'addCredential'])->name('addCredential');
-Route::post('/request/addPermit',  [App\Http\Controllers\RequestController::class, 'addPermit'])->name('addPermit');
+Route::get('/request/credential/{type}', [\App\Http\Controllers\RequestController::class, 'credential'])->name('credential')->whereIn('type', ['Clearance', 'ID', 'Certificate']);;
+Route::get('/request/permit', [\App\Http\Controllers\RequestController::class, 'permit'])->name('permit');
+Route::post('/request/addCredential',  [\App\Http\Controllers\RequestController::class, 'addCredential'])->name('addCredential');
+Route::post('/request/addPermit',  [\App\Http\Controllers\RequestController::class, 'addPermit'])->name('addPermit');
 
 Route::get('/request/success',  function () {
     return view('request.success');
