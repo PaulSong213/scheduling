@@ -16,10 +16,8 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-if (App::environment('production')) {
-    URL::forceScheme('https');
-}
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+URL::forceScheme('https');

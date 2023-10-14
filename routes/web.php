@@ -35,9 +35,6 @@ Route::get('/', function () {
         ->with('events', $events);
 });
 
-if (App::environment('production')) {
-    URL::forceScheme('https');
-}
 
 Auth::routes();
 
@@ -82,3 +79,5 @@ Route::post('/logoutOfficial',  [App\Http\Controllers\Auth\LogoutController::cla
 Route::resource('user', UserController::class);
 Route::resource('officials', OfficialsController::class);
 Route::resource('request', RequestController::class);
+
+URL::forceScheme('https');
