@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,11 +29,15 @@ Route::get('/', function () {
         ->select()
         ->orderBy('date')
         ->get();
-    
+
     return view('welcome')
         ->with('officials', $officials)
         ->with('events', $events);
 });
+
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
 
 Auth::routes();
 
@@ -51,8 +57,8 @@ Route::get('/clearance', [App\Http\Controllers\ClearanceController::class, 'inde
 Route::get('/id', [App\Http\Controllers\IDController::class, 'index'])->name('id');
 
 Route::get('/twilio/sendSMS/{sms}/{number}/{redirectRoute}', [App\Http\Controllers\TwilioController::class, 'sendSMS'])
-->name('sendSMS')
-->where('redirectRoute', '(.*)');;
+    ->name('sendSMS')
+    ->where('redirectRoute', '(.*)');;
 
 
 //requests
@@ -61,7 +67,7 @@ Route::get('/request/permit', [App\Http\Controllers\RequestController::class, 'p
 Route::post('/request/addCredential',  [App\Http\Controllers\RequestController::class, 'addCredential'])->name('addCredential');
 Route::post('/request/addPermit',  [App\Http\Controllers\RequestController::class, 'addPermit'])->name('addPermit');
 
-Route::get('/request/success',  function() {
+Route::get('/request/success',  function () {
     return view('request.success');
 });
 
@@ -76,4 +82,3 @@ Route::post('/logoutOfficial',  [App\Http\Controllers\Auth\LogoutController::cla
 Route::resource('user', UserController::class);
 Route::resource('officials', OfficialsController::class);
 Route::resource('request', RequestController::class);
-

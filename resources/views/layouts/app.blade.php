@@ -7,8 +7,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
@@ -21,7 +20,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Manuyo Dos</title>
+    <title>Ligas 1</title>
     <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -87,8 +86,7 @@
     <!-- CSS only -->
 
     @livewireStyles
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
 </head>
 
@@ -105,11 +103,9 @@
             <div class="container">
                 <a class="navbar-brand d-flex gap-2" href="{{ url('/') }}">
                     <img style="height: 2rem" src="/images/logo.jpg">
-                    <span class="d-block my-auto">Manuyo Dos</span>
+                    <span class="d-block my-auto">Ligas 1</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -122,63 +118,55 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         @if (Auth::guard('web')->check())
-                            {{-- User authenticated --}}
-                            <li class="nav-item dropdown d-flex" id="navbarDropdown">
-                                <div class="shadow-sm border profile-container my-auto">
-                                    <img class="profile-image" src="{{ Auth::user()->profile_filename }} " />
-                                </div>
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#"
-                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    v-pre>
-                                    {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
-                                </a>
+                        {{-- User authenticated --}}
+                        <li class="nav-item dropdown d-flex" id="navbarDropdown">
+                            <div class="shadow-sm border profile-container my-auto">
+                                <img class="profile-image" src="{{ Auth::user()->profile_filename }} " />
+                            </div>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
+                            </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @elseif(Auth::guard('official')->check())
-                            {{-- Official authenticated --}}
-                            <li class="nav-item dropdown d-flex" id="navbarDropdown">
-                                <div class="shadow-sm border profile-container my-auto">
-                                    <img class="profile-image"
-                                        src="{{ Auth::guard('official')->user()->profile_filename }}" />
-                                    />
-                                </div>
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#"
-                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    v-pre>
-                                    {{ Auth::guard('official')->user()->first_name . ' ' . Auth::guard('official')->user()->last_name }}
+                                    {{ __('Logout') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end"  aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logoutOfficial') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form-official').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                        @elseif(Auth::guard('official')->check())
+                        {{-- Official authenticated --}}
+                        <li class="nav-item dropdown d-flex" id="navbarDropdown">
+                            <div class="shadow-sm border profile-container my-auto">
+                                <img class="profile-image" src="{{ Auth::guard('official')->user()->profile_filename }}" />
+                                />
+                            </div>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle my-auto" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::guard('official')->user()->first_name . ' ' . Auth::guard('official')->user()->last_name }}
+                            </a>
 
-                                    <form id="logout-form-official" action="{{ route('logoutOfficial') }}"
-                                        method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logoutOfficial') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form-official').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form-official" action="{{ route('logoutOfficial') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('residentRegister') }}">{{ __('Register') }}</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('residentRegister') }}">{{ __('Register') }}</a>
+                        </li>
                         @endif
 
 
@@ -202,10 +190,10 @@
     @yield('script')
     @livewireScripts
     <script>
-        $("#navbarDropdown").mouseover(function(){
+        $("#navbarDropdown").mouseover(function() {
             $(".dropdown-menu").show();
         });
-        $("#navbarDropdown").mouseout(function(){
+        $("#navbarDropdown").mouseout(function() {
             $(".dropdown-menu").hide();
         });
     </script>
